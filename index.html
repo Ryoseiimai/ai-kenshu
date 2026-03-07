@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIエージェント研修 | RYOSEIWORLD - 御社の社員の仕事をAIが代行する</title>
+    <meta name="description" content="AIエージェント研修。19体のAI組織を自社運用するプロが、御社の業務を自動化するAIエージェントの作り方をZoomで教えます。月3社限定。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans JP', sans-serif; color: #1a1a1a; line-height: 1.8; }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            padding: 100px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+        .hero h1 .accent { color: #d4af37; }
+        .hero p { font-size: 18px; opacity: 0.85; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        .cta-btn {
+            display: inline-block;
+            background: #d4af37;
+            color: #0a0a0a;
+            padding: 18px 48px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+        }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4); }
+        .cta-sub { display: block; font-size: 13px; opacity: 0.7; margin-top: 12px; }
+
+        /* Sections */
+        section { padding: 80px 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .section-title {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 50px;
+            line-height: 1.4;
+        }
+        .section-title .accent { color: #d4af37; }
+
+        /* Problems */
+        .problems { background: #f8f8f8; }
+        .problem-list { list-style: none; max-width: 700px; margin: 0 auto; }
+        .problem-list li {
+            background: #fff;
+            padding: 24px 30px;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            font-size: 17px;
+            border-left: 4px solid #e74c3c;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .problem-list li strong { color: #e74c3c; }
+
+        /* Solution */
+        .solution-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+        .solution-card {
+            background: #fff;
+            border: 2px solid #eee;
+            border-radius: 16px;
+            padding: 36px 28px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .solution-card:hover { border-color: #d4af37; transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+        .solution-card .icon { font-size: 48px; margin-bottom: 16px; }
+        .solution-card h3 { font-size: 20px; margin-bottom: 12px; }
+        .solution-card p { font-size: 15px; opacity: 0.7; }
+
+        /* Results */
+        .results { background: #0a0a0a; color: #fff; }
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .result-item .number { font-size: 48px; font-weight: 900; color: #d4af37; }
+        .result-item .label { font-size: 15px; opacity: 0.7; margin-top: 8px; }
+
+        /* Pricing */
+        .pricing { background: #f8f8f8; }
+        .price-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+        .price-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px 28px;
+            text-align: center;
+            border: 2px solid #eee;
+            position: relative;
+        }
+        .price-card.featured {
+            border-color: #d4af37;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.15);
+        }
+        .price-card.featured::before {
+            content: 'おすすめ';
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #d4af37;
+            color: #0a0a0a;
+            padding: 4px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .price-card h3 { font-size: 22px; margin-bottom: 8px; }
+        .price-card .price { font-size: 42px; font-weight: 900; color: #d4af37; margin: 16px 0; }
+        .price-card .price span { font-size: 16px; color: #666; }
+        .price-card .duration { font-size: 15px; color: #666; margin-bottom: 20px; }
+        .price-card ul { list-style: none; text-align: left; margin-bottom: 30px; }
+        .price-card ul li { padding: 8px 0; font-size: 15px; border-bottom: 1px solid #f0f0f0; }
+        .price-card ul li::before { content: '✓ '; color: #d4af37; font-weight: bold; }
+        .price-card .cta-btn { padding: 14px 36px; font-size: 16px; }
+
+        /* Flow */
+        .flow-list { max-width: 700px; margin: 0 auto; }
+        .flow-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 36px;
+        }
+        .flow-number {
+            width: 50px;
+            height: 50px;
+            background: #d4af37;
+            color: #0a0a0a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .flow-item h3 { font-size: 18px; margin-bottom: 4px; }
+        .flow-item p { font-size: 15px; opacity: 0.7; }
+
+        /* Profile */
+        .profile { background: #f8f8f8; }
+        .profile-box {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            padding: 48px 36px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .profile-box .name { font-size: 28px; font-weight: 900; margin-bottom: 8px; }
+        .profile-box .title { font-size: 15px; color: #666; margin-bottom: 24px; }
+        .profile-box .bio { text-align: left; font-size: 15px; line-height: 2; }
+
+        /* FAQ */
+        .faq-list { max-width: 700px; margin: 0 auto; }
+        .faq-item { margin-bottom: 20px; background: #fff; border-radius: 12px; padding: 24px 28px; border: 1px solid #eee; }
+        .faq-item .q { font-weight: 700; font-size: 16px; margin-bottom: 10px; color: #d4af37; }
+        .faq-item .a { font-size: 15px; opacity: 0.8; }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #fff;
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .cta-section h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 900; margin-bottom: 20px; }
+        .cta-section p { font-size: 17px; opacity: 0.8; margin-bottom: 40px; }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 13px;
+        }
+        footer a { color: rgba(255,255,255,0.5); }
+
+        /* Floating CTA (mobile) */
+        .floating-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #0a0a0a;
+            padding: 12px 20px;
+            z-index: 100;
+            text-align: center;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+        }
+        .floating-cta .cta-btn { padding: 14px 36px; font-size: 16px; width: 100%; max-width: 400px; }
+
+        @media (max-width: 768px) {
+            .floating-cta { display: block; }
+            section { padding: 60px 16px; }
+            .hero { padding: 80px 16px 60px; }
+            body { padding-bottom: 70px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">月3社限定 / 19体のAIエージェントを運用する講師が直接指導</div>
+        <h1>御社の社員の仕事を<br><span class="accent">AIエージェント</span>が代行する</h1>
+        <p>ChatGPTの使い方じゃない。「勝手に仕事してくれるAI」の作り方を教えます。19体のAIエージェント組織を自社運用するプロが、御社専用のAIエージェント構築までサポート。</p>
+        <a href="#contact" class="cta-btn">無料相談を予約する<span class="cta-sub">30分のヒアリング（無料）からスタート</span></a>
+    </div>
+</section>
+
+<!-- Problems -->
+<section class="problems">
+    <div class="container">
+        <h2 class="section-title">こんな<span class="accent">お悩み</span>ありませんか？</h2>
+        <ul class="problem-list">
+            <li><strong>ChatGPTは入れたけど…</strong> — 社員が使いこなせてない。結局手作業に戻ってる</li>
+            <li><strong>人手が足りない</strong> — 採用したいけどコストが合わない。でも業務は回らない</li>
+            <li><strong>AIエージェントって何？</strong> — ニュースで見るけど、うちの業務に使えるのかわからない</li>
+            <li><strong>自動化したいけど、何から？</strong> — 日報、報告書、メール対応…全部手作業でやってる</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Solution -->
+<section>
+    <div class="container">
+        <h2 class="section-title"><span class="accent">AIエージェント</span>が全部解決します</h2>
+        <div class="solution-cards">
+            <div class="solution-card">
+                <div class="icon">🤖</div>
+                <h3>「勝手にやってくれるAI」を作る</h3>
+                <p>ChatGPTに聞くだけじゃない。指示しなくても勝手に仕事してくれるAIエージェントの作り方を教えます。</p>
+            </div>
+            <div class="solution-card">
+                <div class="icon">🔨</div>
+                <h3>その場で1体作って帰る</h3>
+                <p>研修中に御社の業務に合わせたAIエージェントを1体構築。研修が終わった瞬間から使えます。</p>
+            </div>
+            <div class="solution-card">
+                <div class="icon">💬</div>
+                <h3>プログラミング不要</h3>
+                <p>コードは一切書きません。日本語で指示するだけ。誰でもAIエージェントが作れるようになります。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Results -->
+<section class="results">
+    <div class="container">
+        <h2 class="section-title" style="color:#fff">講師の<span class="accent">実績</span></h2>
+        <div class="result-grid">
+            <div class="result-item">
+                <div class="number">15</div>
+                <div class="label">PMO案件実績（10業界）</div>
+            </div>
+            <div class="result-item">
+                <div class="number">40万</div>
+                <div class="label">登録YouTubeチャンネルのAI化支援</div>
+            </div>
+            <div class="result-item">
+                <div class="number">30</div>
+                <div class="label">店舗のバックオフィス改革を納品</div>
+            </div>
+            <div class="result-item">
+                <div class="number">19体</div>
+                <div class="label">AIエージェントを自社で運用中</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+    <div class="container">
+        <h2 class="section-title">料金プラン</h2>
+        <div class="price-cards">
+            <div class="price-card">
+                <h3>ライト</h3>
+                <div class="price">5<span>万円（税込）</span></div>
+                <div class="duration">1時間</div>
+                <ul>
+                    <li>AI基礎レクチャー</li>
+                    <li>ライブデモンストレーション</li>
+                    <li>質疑応答</li>
+                    <li>研修資料PDF</li>
+                </ul>
+                <a href="#contact" class="cta-btn">無料相談する</a>
+            </div>
+            <div class="price-card featured">
+                <h3>スタンダード</h3>
+                <div class="price">8<span>万円（税込）</span></div>
+                <div class="duration">1.5時間</div>
+                <ul>
+                    <li>AI基礎レクチャー</li>
+                    <li>ライブデモンストレーション</li>
+                    <li>参加者の実践ワーク</li>
+                    <li>御社業務への提案</li>
+                    <li>研修資料PDF</li>
+                    <li>研修後1週間の質問対応</li>
+                </ul>
+                <a href="#contact" class="cta-btn">無料相談する</a>
+            </div>
+            <div class="price-card">
+                <h3>プレミアム</h3>
+                <div class="price">10<span>万円（税込）</span></div>
+                <div class="duration">2時間</div>
+                <ul>
+                    <li>AI基礎レクチャー</li>
+                    <li>ライブデモンストレーション</li>
+                    <li>参加者の実践ワーク</li>
+                    <li>御社専用カスタマイズ提案</li>
+                    <li>AI導入ロードマップ作成</li>
+                    <li>研修資料PDF</li>
+                    <li>研修後2週間の質問対応</li>
+                </ul>
+                <a href="#contact" class="cta-btn">無料相談する</a>
+            </div>
+        </div>
+        <p style="text-align:center; margin-top:24px; font-size:14px; color:#666;">※参加人数による追加料金はありません（何名でも同一料金）<br>※リピート研修は10%OFF</p>
+    </div>
+</section>
+
+<!-- Flow -->
+<section>
+    <div class="container">
+        <h2 class="section-title">ご利用の<span class="accent">流れ</span></h2>
+        <div class="flow-list">
+            <div class="flow-item">
+                <div class="flow-number">1</div>
+                <div>
+                    <h3>無料相談（30分）</h3>
+                    <p>御社の課題・ゴールをヒアリング。研修の方向性を一緒に決めます。</p>
+                </div>
+            </div>
+            <div class="flow-item">
+                <div class="flow-number">2</div>
+                <div>
+                    <h3>研修内容のカスタマイズ</h3>
+                    <p>御社の業務に合わせて研修資料を調整。「使える」内容に仕上げます。</p>
+                </div>
+            </div>
+            <div class="flow-item">
+                <div class="flow-number">3</div>
+                <div>
+                    <h3>Zoom研修の実施</h3>
+                    <p>講義 + ライブデモ + 実践ワーク。参加者が実際にAIを動かします。</p>
+                </div>
+            </div>
+            <div class="flow-item">
+                <div class="flow-number">4</div>
+                <div>
+                    <h3>研修後フォロー</h3>
+                    <p>資料のお渡し + 質問対応。「研修受けたけど結局使えない」を防ぎます。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Profile -->
+<section class="profile">
+    <div class="container">
+        <h2 class="section-title">講師<span class="accent">プロフィール</span></h2>
+        <div class="profile-box">
+            <div class="name">今井涼晴</div>
+            <div class="title">RYOSEIWORLD合同会社 代表 / AI×PMOコンサルタント</div>
+            <div class="bio">
+                <p>コンサルティングファーム5年、PMO案件15件（通信・金融・人材・小売・不動産・建設・海運・製造・医療・放送の10業界）を経て独立。</p>
+                <br>
+                <p>PMBOKの書籍出版サポート、40万登録YouTubeチャンネルのAI化支援、全国30店舗企業のバックオフィス改革（成果物8件納品）など、AIとプロジェクト管理の両方の実務経験を持つ。</p>
+                <br>
+                <p>現在は自社で19体のAIエージェント組織を構築・運用しながら、中小企業向けにAI活用研修・業務改革支援を提供。</p>
+                <br>
+                <p><strong>「難しい専門用語を使わない、誰でもわかるAI研修」</strong>がモットー。</p>
+                <br>
+                <p>資格: MOS Master / ITパスポート / 秘書検定 / 全商簿記1級</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section>
+    <div class="container">
+        <h2 class="section-title">よくある<span class="accent">質問</span></h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="q">Q. AIの知識がまったくない社員でも大丈夫ですか？</div>
+                <div class="a">はい、まったくの初心者向けに設計しています。専門用語を使わず、画面を見せながら丁寧に進めます。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">Q. 何人まで参加できますか？</div>
+                <div class="a">人数制限はありません。少人数でもチーム全体でもOKです。料金は変わりません。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">Q. 自社の業務に合わせた内容にできますか？</div>
+                <div class="a">スタンダード・プレミアムプランでは、事前ヒアリングをもとに御社の業務に合わせた内容にカスタマイズします。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">Q. ChatGPTだけ教えてほしいのですが…</div>
+                <div class="a">もちろんOKです。ご要望に合わせて、特定のツールに絞った研修も可能です。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">Q. 領収書は発行できますか？</div>
+                <div class="a">はい、法人名義の領収書を発行できます。お気軽にお申し付けください。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">Q. 研修後に質問はできますか？</div>
+                <div class="a">はい、プランに応じて1〜2週間のメール質問対応を無料で行います。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+    <div class="container">
+        <h2>まずは<span class="accent">無料相談</span>から</h2>
+        <p>30分のヒアリングで、御社に最適な研修プランをご提案します。<br>お気軽にご連絡ください。</p>
+        <a href="https://forms.gle/YOUR_FORM_ID" class="cta-btn" target="_blank">無料相談を予約する</a>
+        <p style="margin-top:20px; font-size:14px; opacity:0.6;">または直接メール: kaeru3160@gmail.com</p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2026 RYOSEIWORLD合同会社 | <a href="mailto:kaeru3160@gmail.com">お問い合わせ</a></p>
+</footer>
+
+<!-- Floating CTA (mobile) -->
+<div class="floating-cta">
+    <a href="#contact" class="cta-btn">無料相談を予約する</a>
+</div>
+
+</body>
+</html>
