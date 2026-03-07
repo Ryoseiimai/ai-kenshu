@@ -203,6 +203,76 @@
         .faq-item .q { font-weight: 700; font-size: 16px; margin-bottom: 10px; color: #d4af37; }
         .faq-item .a { font-size: 15px; opacity: 0.8; }
 
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label {
+            display: block;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .form-group label .required {
+            background: #e74c3c;
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+        .form-group label .optional {
+            background: rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.7);
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: 'Noto Sans JP', sans-serif;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: rgba(255,255,255,0.4); }
+        .form-group select option { color: #1a1a1a; background: #fff; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 12px; }
+        .checkbox-group label {
+            font-weight: 400;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+        .checkbox-group input[type="checkbox"] { width: auto; accent-color: #d4af37; }
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        .form-success h3 { font-size: 24px; color: #d4af37; margin-bottom: 12px; }
+        .form-success p { font-size: 16px; opacity: 0.8; }
+
         /* CTA Section */
         .cta-section {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
@@ -462,15 +532,126 @@
     </div>
 </section>
 
-<!-- CTA -->
+<!-- Contact Form -->
 <section class="cta-section" id="contact">
     <div class="container">
         <h2>まずは<span class="accent">無料相談</span>から</h2>
-        <p>30分のヒアリングで「御社のどの業務がClaude Codeで自動化できるか」を具体的にお伝えします。<br>AIをバラバラに使う時代は終わり。全AIを統率する司令塔を導入しませんか。</p>
-        <a href="https://forms.gle/YOUR_FORM_ID" class="cta-btn" target="_blank">無料相談を予約する</a>
-        <p style="margin-top:20px; font-size:14px; opacity:0.6;">または直接メール: kaeru3160@gmail.com</p>
+        <p>30分のヒアリングで「御社のどの業務がClaude Codeで自動化できるか」を具体的にお伝えします。</p>
+
+        <div class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label>会社名 <span class="required">必須</span></label>
+                <input type="text" id="company" placeholder="株式会社○○" required>
+            </div>
+            <div class="form-group">
+                <label>お名前 <span class="required">必須</span></label>
+                <input type="text" id="name" placeholder="山田 太郎" required>
+            </div>
+            <div class="form-group">
+                <label>メールアドレス <span class="required">必須</span></label>
+                <input type="email" id="email" placeholder="example@company.com" required>
+            </div>
+            <div class="form-group">
+                <label>電話番号 <span class="optional">任意</span></label>
+                <input type="tel" id="phone" placeholder="090-0000-0000">
+            </div>
+            <div class="form-group">
+                <label>現在のAI活用状況 <span class="required">必須</span></label>
+                <select id="aiStatus" required>
+                    <option value="" disabled selected>選択してください</option>
+                    <option value="まだ何もしていない">まだ何もしていない</option>
+                    <option value="ChatGPT等を少し触った程度">ChatGPT等を少し触った程度</option>
+                    <option value="一部業務で活用中">一部業務で活用中</option>
+                    <option value="本格的に導入済み">本格的に導入済み</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>研修で知りたいこと <span class="optional">任意</span></label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" value="AIエージェントとは何か"> AIエージェントとは何か</label>
+                    <label><input type="checkbox" value="自社業務での活用方法"> 自社業務での活用方法</label>
+                    <label><input type="checkbox" value="導入コストと効果"> 導入コストと効果</label>
+                    <label><input type="checkbox" value="セキュリティ面"> セキュリティ面</label>
+                    <label><input type="checkbox" value="Claude Codeの使い方"> Claude Codeの使い方</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>ご希望の相談日程 <span class="optional">任意</span></label>
+                <input type="text" id="schedule" placeholder="例: 来週の平日午後、3/15以降の午前中 など">
+            </div>
+            <div style="text-align:center; margin-top:32px;">
+                <button type="button" onclick="submitForm()" class="cta-btn" id="submitBtn">無料相談を予約する</button>
+            </div>
+            <p style="text-align:center; margin-top:16px; font-size:13px; opacity:0.5;">または直接メール: kaeru3160@gmail.com</p>
+        </div>
+
+        <div class="form-success" id="formSuccess">
+            <h3>送信完了！</h3>
+            <p>お問い合わせありがとうございます。<br>24時間以内にメールでご連絡いたします。</p>
+        </div>
     </div>
 </section>
+
+<script>
+// GAS WebアプリのURL（デプロイ後に差し替え）
+const FORM_ENDPOINT = '';
+
+async function submitForm() {
+    const btn = document.getElementById('submitBtn');
+    const company = document.getElementById('company').value.trim();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const aiStatus = document.getElementById('aiStatus').value;
+    const schedule = document.getElementById('schedule').value.trim();
+
+    const interests = [];
+    document.querySelectorAll('.checkbox-group input:checked').forEach(cb => interests.push(cb.value));
+
+    if (!company || !name || !email || !aiStatus) {
+        alert('必須項目を入力してください');
+        return;
+    }
+
+    btn.textContent = '送信中...';
+    btn.style.opacity = '0.6';
+    btn.disabled = true;
+
+    const data = { company, name, email, phone, aiStatus, interests: interests.join(', '), schedule };
+
+    try {
+        if (FORM_ENDPOINT) {
+            await fetch(FORM_ENDPOINT, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+        }
+        // メールフォールバック（GAS未設定時）
+        if (!FORM_ENDPOINT) {
+            const subject = encodeURIComponent('【AI研修】無料相談希望: ' + company + ' ' + name);
+            const body = encodeURIComponent(
+                '会社名: ' + company + '\n' +
+                'お名前: ' + name + '\n' +
+                'メール: ' + email + '\n' +
+                '電話: ' + (phone || '未入力') + '\n' +
+                'AI活用状況: ' + aiStatus + '\n' +
+                '知りたいこと: ' + (interests.join(', ') || '未入力') + '\n' +
+                '希望日程: ' + (schedule || '未入力')
+            );
+            window.open('mailto:kaeru3160@gmail.com?subject=' + subject + '&body=' + body);
+        }
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+    } catch(err) {
+        alert('送信に失敗しました。kaeru3160@gmail.com まで直接ご連絡ください。');
+        btn.textContent = '無料相談を予約する';
+        btn.style.opacity = '1';
+        btn.disabled = false;
+    }
+}
+</script>
 
 <!-- Footer -->
 <footer>
