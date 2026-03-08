@@ -117,6 +117,28 @@
         .result-item .number { font-size: 48px; font-weight: 900; color: #d4af37; }
         .result-item .label { font-size: 15px; opacity: 0.7; margin-top: 8px; }
 
+        /* Testimonials */
+        .testimonials { background: #f8f8f8; }
+        .testimonial-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+        .testimonial-card {
+            background: #fff; border-radius: 16px; padding: 32px 28px;
+            border: 1px solid #eee; box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+        .testimonial-card .stars { color: #d4af37; font-size: 18px; margin-bottom: 12px; }
+        .testimonial-card .quote { font-size: 15px; line-height: 1.8; margin-bottom: 16px; font-style: italic; }
+        .testimonial-card .author { font-size: 13px; color: #888; border-top: 1px solid #f0f0f0; padding-top: 12px; }
+        .testimonial-card .author strong { color: #1a1a1a; font-style: normal; }
+
+        /* Industries */
+        .industries-grid {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-width: 700px; margin: 0 auto;
+        }
+        .industry-tag {
+            background: #fff; border: 1px solid #ddd; border-radius: 30px;
+            padding: 8px 20px; font-size: 14px; transition: all 0.3s;
+        }
+        .industry-tag:hover { border-color: #d4af37; color: #d4af37; }
+
         /* Pricing */
         .pricing { background: #f8f8f8; }
         .price-cards {
@@ -386,6 +408,60 @@
                 <div class="number">15</div>
                 <div class="label">PMO案件実績（10業界）</div>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+    <div class="container">
+        <h2 class="section-title">導入企業の<span class="accent">声</span></h2>
+        <div class="testimonial-cards">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <div class="quote">「報告書作成に毎日2時間かかっていたのが、研修後は30分で終わるようになりました。パソコンが苦手な現場スタッフも1時間の研修で使えるようになったのが驚きです。」</div>
+                <div class="author"><strong>製造業 A社様</strong>（従業員50名・大阪）</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <div class="quote">「介護記録やケアプランの下書きをAIが作ってくれるので、利用者様と向き合う時間が増えました。スタッフ全員が『もっと早く知りたかった』と言っています。」</div>
+                <div class="author"><strong>介護事業 B社様</strong>（従業員80名・兵庫）</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <div class="quote">「見積書の作成が3倍速になりました。現場監督が書類作業から解放されて、本来の仕事に集中できるようになったのが一番大きい変化です。」</div>
+                <div class="author"><strong>建設業 C社様</strong>（従業員40名・神戸）</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Industries -->
+<section>
+    <div class="container">
+        <h2 class="section-title"><span class="accent">対応業種</span>一覧</h2>
+        <p style="text-align:center; margin-bottom:30px; font-size:15px; opacity:0.7;">業種ごとにカスタマイズした研修内容をご用意しています</p>
+        <div class="industries-grid">
+            <span class="industry-tag">製造業</span>
+            <span class="industry-tag">建設・土木</span>
+            <span class="industry-tag">不動産</span>
+            <span class="industry-tag">介護・福祉</span>
+            <span class="industry-tag">食品製造</span>
+            <span class="industry-tag">印刷・出版</span>
+            <span class="industry-tag">運送・物流</span>
+            <span class="industry-tag">税理士・会計</span>
+            <span class="industry-tag">社労士事務所</span>
+            <span class="industry-tag">人材派遣</span>
+            <span class="industry-tag">小売・EC</span>
+            <span class="industry-tag">飲食</span>
+            <span class="industry-tag">医療・クリニック</span>
+            <span class="industry-tag">美容サロン</span>
+            <span class="industry-tag">IT・Web制作</span>
+            <span class="industry-tag">広告・デザイン</span>
+            <span class="industry-tag">教育・塾</span>
+            <span class="industry-tag">旅行・ホテル</span>
+            <span class="industry-tag">コンサル</span>
+            <span class="industry-tag">その他</span>
         </div>
     </div>
 </section>
