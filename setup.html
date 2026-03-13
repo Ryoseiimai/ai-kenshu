@@ -306,7 +306,7 @@
 
     <div id="instructions-vscode" style="background:#0f172a;border-radius:10px;padding:16px;margin-bottom:14px;display:none;">
       <p style="margin-bottom:12px;"><strong style="color:#3b82f6;">1.</strong> <strong>VS Code</strong> を開く</p>
-      <p style="margin-bottom:12px;"><strong style="color:#3b82f6;">2.</strong> 上メニュー「Terminal」→「New Terminal」（またはCtrl + `）</p>
+      <p style="margin-bottom:12px;"><strong style="color:#3b82f6;">2.</strong> 上メニュー「Terminal」→「New Terminal」（Windows: Ctrl + ` / Mac: Cmd + `）</p>
       <p style="margin-bottom:6px;"><strong style="color:#3b82f6;">3.</strong> ターミナルに以下を<strong>順番に</strong>コピペしてEnter:</p>
       <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ Claude Codeをインストール</p>
       <div class="copy-cmd" onclick="copyCmd(this)"><code>npm install -g @anthropic-ai/claude-code</code><button class="copy-btn">コピー</button></div>
@@ -329,8 +329,11 @@
       <summary>「npm」が見つからないと出た場合</summary>
       <div class="acc-body">
         Node.jsが入っていません。先にインストールしてください:<br>
-        <div class="copy-cmd" onclick="copyCmd(this)" style="margin-top:8px;"><code>winget install OpenJS.NodeJS</code><button class="copy-btn">コピー</button></div>
-        <p style="font-size:12px;margin-top:6px;">wingetが使えない場合は <a href="https://nodejs.org/" target="_blank" style="color:#3b82f6;">nodejs.org</a> から直接ダウンロード。<br>インストール後、ターミナルを<strong>閉じて開き直して</strong>からもう一度やってください。</p>
+        <p style="font-size:12px;margin-top:8px;margin-bottom:2px;"><strong>Windows:</strong></p>
+        <div class="copy-cmd" onclick="copyCmd(this)"><code>winget install OpenJS.NodeJS</code><button class="copy-btn">コピー</button></div>
+        <p style="font-size:12px;margin-bottom:2px;"><strong>Mac:</strong></p>
+        <div class="copy-cmd" onclick="copyCmd(this)"><code>brew install node</code><button class="copy-btn">コピー</button></div>
+        <p style="font-size:12px;margin-top:6px;">上のコマンドが使えない場合は <a href="https://nodejs.org/" target="_blank" style="color:#3b82f6;">nodejs.org</a> から直接ダウンロード。<br>インストール後、ターミナルを<strong>閉じて開き直して</strong>からもう一度やってください。</p>
       </div>
     </details>
 
@@ -347,14 +350,19 @@
     <p>紫ボックスをクリック → コピーされる → ターミナルに貼ってEnter。</p>
 
     <div style="background:#1e293b;border:1px solid #f59e0b;border-radius:10px;padding:14px;margin-bottom:14px;">
-      <p style="font-size:13px;color:#fbbf24;margin-bottom:6px;">⚡ <strong>作業フォルダーはCドライブに作ろう</strong></p>
-      <p style="font-size:12px;color:#cbd5e1;margin-bottom:0;">OneDriveやクラウド同期フォルダ上で作業すると、ファイルの読み書きが遅くなります。<br><code style="background:#334155;padding:1px 5px;border-radius:3px;font-size:11px;">C:\Users\あなたの名前\Desktop</code> など<strong>Cドライブ直下</strong>に作業フォルダーを置くのがおすすめです。</p>
+      <p style="font-size:13px;color:#fbbf24;margin-bottom:6px;">⚡ <strong>作業フォルダーはローカルに作ろう</strong></p>
+      <p style="font-size:12px;color:#cbd5e1;margin-bottom:0;">OneDrive・iCloudなどクラウド同期フォルダ上で作業すると、ファイルの読み書きが遅くなります。<br>
+      <strong>Windows:</strong> <code style="background:#334155;padding:1px 5px;border-radius:3px;font-size:11px;">C:\Users\あなたの名前\Desktop</code> などCドライブ直下<br>
+      <strong>Mac:</strong> <code style="background:#334155;padding:1px 5px;border-radius:3px;font-size:11px;">~/Desktop</code> などホームディレクトリ直下<br>
+      に作業フォルダーを置くのがおすすめです。</p>
     </div>
 
     <div class="prompt-box" onclick="copyPrompt(this)">
       <p class="prompt-label">Claudeへの指示</p>
       <pre>以下をやってください:
-1. Cドライブのデスクトップに作業用フォルダーを作って（フォルダ名は好きに決めてOK。OneDriveの中は避けて）
+1. デスクトップに作業用フォルダーを作って（フォルダ名は好きに決めてOK）
+   - Windowsの場合: Cドライブ直下（OneDriveの中は避けて）
+   - Macの場合: ~/Desktop（iCloudの中は避けて）
 2. そのフォルダーに移動して /init を実行して
 日本語で対応して。</pre>
     </div>
