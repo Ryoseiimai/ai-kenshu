@@ -103,7 +103,7 @@
 
   <div class="progress-wrap">
     <div class="bar-bg"><div class="bar-fill" id="progressFill"></div></div>
-    <div class="bar-label" id="progressLabel">0 / 8</div>
+    <div class="bar-label" id="progressLabel">0 / 11</div>
   </div>
 
   <!-- ===== STEP 0: スタート ===== -->
@@ -133,15 +133,27 @@
         </div>
         <div class="roadmap-item upcoming">
           <span class="rm-icon">⑥</span>
-          <span class="rm-text">指示書（CLAUDE.md）でAIの役割を定義する</span>
+          <span class="rm-text">指示書（CLAUDE.md）でAI組織の設計図を書く</span>
         </div>
         <div class="roadmap-item upcoming">
           <span class="rm-icon">⑦</span>
-          <span class="rm-text">サブエージェント（AI部下）を動かしてみる</span>
+          <span class="rm-text">スキル（カスタムコマンド）を作る</span>
         </div>
         <div class="roadmap-item upcoming">
           <span class="rm-icon">⑧</span>
-          <span class="rm-text">外部ツール連携（Gmail・カレンダー等）</span>
+          <span class="rm-text">MCP（外部ツール連携）を設定する</span>
+        </div>
+        <div class="roadmap-item upcoming">
+          <span class="rm-icon">⑨</span>
+          <span class="rm-text">サブエージェント（AI部下）を動かす</span>
+        </div>
+        <div class="roadmap-item upcoming">
+          <span class="rm-icon">⑩</span>
+          <span class="rm-text">フック（自動処理）を設定する</span>
+        </div>
+        <div class="roadmap-item upcoming">
+          <span class="rm-icon">⑪</span>
+          <span class="rm-text">全部つなげてテスト（AI組織を稼働させる）</span>
         </div>
       </div>
       <p style="font-size:12px;color:#475569;margin:12px 0;">完了すると：AIエージェントのチームがあなたの指示で動く状態になります</p>
@@ -281,11 +293,12 @@
     </div>
   </div>
 
-  <!-- ===== STEP 6: CLAUDE.md で役割定義 ===== -->
+  <!-- ===== STEP 6: CLAUDE.md で設計図を書く ===== -->
   <div class="step-card" id="step6">
     <span class="step-badge claude">Claudeにやってもらう</span>
-    <h2>⑥ AIの役割を定義する（指示書）</h2>
+    <h2>⑥ 指示書（CLAUDE.md）でAI組織の設計図を書く</h2>
     <p>CLAUDE.mdに「あなたは何者で、何をすべきか」を書きます。<br>これがAI組織の<strong>設計図</strong>になります。</p>
+    <p style="font-size:12px;color:#f97316;margin-bottom:4px;">この指示書があるとClaudeが毎回自動で読み込んで、設定なしでAI組織として動きます。</p>
 
     <div class="prompt-box" onclick="copyPrompt(this)">
       <p class="prompt-label">Claudeへの指示（AI組織の設計図を作る）</p>
@@ -312,7 +325,7 @@
 保存したら「設定完了」と教えてください。</pre>
     </div>
 
-    <p class="hint">これで<strong>Claudeが毎回この設計図を自動で読み込んで動く</strong>ようになります。<br>起動するたびに「社長、何をしますか？」という状態になります。</p>
+    <p class="hint">起動するたびにAIが設計図を読んで「社長、何をしますか？」という状態になります。</p>
 
     <div class="btns-row">
       <button class="btn-back" onclick="go('step5')">← 戻る</button>
@@ -320,24 +333,34 @@
     </div>
   </div>
 
-  <!-- ===== STEP 7: サブエージェントを動かす ===== -->
+  <!-- ===== STEP 7: スキル（カスタムコマンド）を作る ===== -->
   <div class="step-card" id="step7">
     <span class="step-badge claude">Claudeにやってもらう</span>
-    <h2>⑦ AI部下（サブエージェント）を動かす</h2>
-    <p>CEOのClaudeが<strong>別のAIに仕事を振って並列で処理</strong>します。<br>これが「AI組織」の本質です。試してみましょう。</p>
+    <h2>⑦ スキル（カスタムコマンド）を作る</h2>
+    <p>繰り返す仕事を <code style="background:#334155;padding:2px 6px;border-radius:4px;">/コマンド名</code> で一発実行できるようにします。<br>「毎朝やるニュースチェック」「週次レポート」みたいな<strong>定型業務をコマンド化</strong>して、毎回同じ指示を打つ手間をゼロにします。</p>
 
     <div class="prompt-box" onclick="copyPrompt(this)">
-      <p class="prompt-label">Claudeへの指示（サブエージェントで実行）</p>
-      <pre>以下の3つのタスクをサブエージェントに振って、並列で同時に実行してください:
+      <p class="prompt-label">Claudeへの指示（スキルを作る）</p>
+      <pre>.claude/commands/ フォルダーに以下のスキルを作ってください:
 
-1. リサーチ部: 「AIエージェント」の最新ニュースを3つ調べてまとめて
-2. マーケ部: 上のニュースを元にSNS投稿文を3パターン作って
-3. 開発部: 「今日のタスクリスト」を管理するHTMLアプリを作って
+1.「朝レポート」スキル（ファイル名: 朝レポート.md）:
+   実行内容:
+   - 最新のAI・ビジネスニュースを3つ取得して要約
+   - 今日やるべきタスクを優先度順に整理
+   - 「今日の一言アドバイス」を1文で添える
+   使い方: /朝レポート と入力するだけで実行
 
-全部終わったらまとめて報告してください。</pre>
+2.「週次レポート」スキル（ファイル名: 週次レポート.md）:
+   実行内容:
+   - 今週完了したタスクを一覧化
+   - 来週の優先タスクをトップ3で提案
+   - 改善すべき点を1つ挙げる
+   使い方: /週次レポート と入力するだけで実行
+
+作ったら、それぞれの使い方と実行例を教えて。</pre>
     </div>
 
-    <p class="hint">3つのタスクが<strong>同時並行で</strong>進みます。数分で全部の結果が返ってきます。<br>これが1人でやるのと組織で回すのとの違いです。</p>
+    <p class="hint">スキルは一度作ればずっと使えます。定型業務が増えたら同じ方法でどんどん追加できます。</p>
 
     <div class="btns-row">
       <button class="btn-back" onclick="go('step6')">← 戻る</button>
@@ -348,14 +371,14 @@
   <!-- ===== STEP 8: MCP外部ツール連携 ===== -->
   <div class="step-card" id="step8">
     <span class="step-badge claude">Claudeにやってもらう</span>
-    <h2>⑧ 外部ツールと連携する（MCP）</h2>
-    <p>Gmail・Googleカレンダー・Notionなどと繋げて、<br>AIが<strong>実際にメールを読んだり予定を入れたり</strong>できるようにします。</p>
+    <h2>⑧ MCP（外部ツール連携）を設定する</h2>
+    <p>Gmail・Googleカレンダー・Notion・Slackなどと繋げます。<br>MCPは「<strong>コンセントのようなもの</strong>」。一度つなげばAIが直接外部ツールを操作できます。</p>
 
     <div class="prompt-box" onclick="copyPrompt(this)">
       <p class="prompt-label">Claudeへの指示（MCP設定）</p>
       <pre>以下の外部ツール連携（MCP）を設定してください:
 
-1. まずMCPとは何かを簡単に説明して
+1. まずMCPとは何かを30秒で説明して
 2. Gmail と連携する手順を教えて（実際に設定まで）
 3. Googleカレンダーと連携する手順を教えて
 4. 設定が終わったら「カレンダーの今週の予定を教えて」を実行してテストして
@@ -363,11 +386,95 @@
 日本語でステップバイステップでお願いします。</pre>
     </div>
 
-    <p class="hint">MCPは「AIと外部サービスをつなぐコンセント」のようなもの。<br>一度設定すれば「メール確認して」「予定入れて」が日本語で通じるようになります。</p>
+    <p class="hint">設定後は「メール確認して」「明日の14時に打ち合わせ入れて」が日本語だけで通じるようになります。</p>
 
     <div class="btns-row">
       <button class="btn-back" onclick="go('step7')">← 戻る</button>
-      <button class="btn btn-green" onclick="go('stepDone')">できた → 完了！</button>
+      <button class="btn btn-green" onclick="go('step9')">できた → 次へ</button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 9: サブエージェントを動かす ===== -->
+  <div class="step-card" id="step9">
+    <span class="step-badge claude">Claudeにやってもらう</span>
+    <h2>⑨ サブエージェント（AI部下）を動かす</h2>
+    <p>Claude Code（CEO）が<strong>別のAI（部下）にタスクを投げて同時に処理させる</strong>機能です。<br>人間は大きな方針だけ出す。細かい実行はAIチームが分担します。</p>
+
+    <div class="prompt-box" onclick="copyPrompt(this)">
+      <p class="prompt-label">Claudeへの指示（サブエージェントで3タスク並列実行）</p>
+      <pre>以下の3つのタスクをサブエージェントに振って、並列で同時に実行してください:
+
+1. リサーチ部: 「AIエージェント」の最新ニュースを3つ調べてまとめて
+2. マーケ部: 上のニュースを元にSNS投稿文を3パターン作って
+3. 開発部: 「今日のタスクリスト」を管理するHTMLアプリを作って
+
+全部終わったら結果をまとめて一度に報告してください。</pre>
+    </div>
+
+    <p class="hint">3つのタスクが<strong>同時並行で</strong>進みます。数分で全部の結果が返ってきます。<br>1人でやると3倍かかる作業が一瞬で終わります。</p>
+
+    <div class="btns-row">
+      <button class="btn-back" onclick="go('step8')">← 戻る</button>
+      <button class="btn btn-green" onclick="go('step10')">できた → 次へ</button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 10: フック（自動処理）を設定する ===== -->
+  <div class="step-card" id="step10">
+    <span class="step-badge claude">Claudeにやってもらう</span>
+    <h2>⑩ フック（自動処理）を設定する</h2>
+    <p>特定のアクションが起きたときに<strong>自動で動く処理</strong>を設定します。<br>例：タスク完了 → 自動通知、ファイル保存 → 自動バックアップ。<br>AIが終わったら黙って次の処理まで流してくれる仕組みです。</p>
+
+    <div class="prompt-box" onclick="copyPrompt(this)">
+      <p class="prompt-label">Claudeへの指示（フック設定）</p>
+      <pre>Claude Codeのフック機能を設定してください:
+
+1. タスクが完了したら自動でサマリーをファイルに保存する
+   （保存先: AI作業フォルダー/ログ/完了タスク.txt）
+
+2. エラーが出たら自動でエラー内容をログに記録する
+   （保存先: AI作業フォルダー/ログ/エラーログ.txt）
+
+3. ファイルを編集するたびに自動でバックアップを作る
+   （保存先: AI作業フォルダー/バックアップ/）
+
+設定方法をステップバイステップで教えて、実際に設定まで全部やってください。</pre>
+    </div>
+
+    <p class="hint">フックを設定すると「あとでやり直せる」安心感が生まれます。AIが大量に動いても追跡できます。</p>
+
+    <div class="btns-row">
+      <button class="btn-back" onclick="go('step9')">← 戻る</button>
+      <button class="btn btn-green" onclick="go('step11')">できた → 次へ</button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 11: 全部つなげてテスト ===== -->
+  <div class="step-card" id="step11">
+    <span class="step-badge claude">Claudeにやってもらう</span>
+    <h2>⑪ 全部つなげてテスト（AI組織を稼働させる）</h2>
+    <p>これまで設定した全機能（指示書・スキル・MCP・サブエージェント・フック）を<strong>組み合わせた総合テスト</strong>です。<br>これが通れば、AI組織は完全稼働状態です。</p>
+
+    <div class="prompt-box" onclick="copyPrompt(this)">
+      <p class="prompt-label">Claudeへの指示（AI組織 本番テスト）</p>
+      <pre>今から本番テストをします。以下を順番に実行してください:
+
+1. /朝レポート を実行して今日のタスクを整理して
+2. サブエージェントでリサーチ・マーケ・開発の3タスクを同時実行して
+   - リサーチ: 今日のAIニュースを3つ
+   - マーケ: そのニュースのSNS投稿文1本
+   - 開発: シンプルなメモ帳HTMLファイルを作成
+3. 全タスクの結果をAI作業フォルダー/レポート/test_report.txt にまとめて保存して
+4. カレンダーに「AI組織テスト完了」として今日の予定を追加して
+
+全部終わったら「テスト完了。AI組織は正常稼働中です」と報告してください。</pre>
+    </div>
+
+    <p class="hint">エラーが出ても大丈夫。Claudeにそのままエラー文を見せれば自動で修正してくれます。</p>
+
+    <div class="btns-row">
+      <button class="btn-back" onclick="go('step10')">← 戻る</button>
+      <button class="btn btn-green" onclick="go('stepDone')">テスト完了 → 完成！</button>
     </div>
   </div>
 
@@ -381,9 +488,12 @@
       <div style="background:#0f172a;border-radius:12px;padding:18px;margin:16px 0;text-align:left;">
         <p style="color:#22c55e;font-size:13px;font-weight:700;margin-bottom:10px;">今できるようになったこと:</p>
         <p style="color:#e2e8f0;font-size:13px;margin-bottom:6px;">✅ AIに日本語で何でも指示できる</p>
-        <p style="color:#e2e8f0;font-size:13px;margin-bottom:6px;">✅ 複数タスクをAI部下に同時並列で処理させられる</p>
+        <p style="color:#e2e8f0;font-size:13px;margin-bottom:6px;">✅ CLAUDE.md の設計図でAIが毎回自律的に動く</p>
+        <p style="color:#e2e8f0;font-size:13px;margin-bottom:6px;">✅ /朝レポート などのスキルで定型業務が一発実行できる</p>
         <p style="color:#e2e8f0;font-size:13px;margin-bottom:6px;">✅ Gmail・カレンダーなど外部ツールとAIが連携している</p>
-        <p style="color:#e2e8f0;font-size:13px;margin-bottom:0;">✅ 起動するたびにAIが設計図を読んで「社長、何しますか？」状態</p>
+        <p style="color:#e2e8f0;font-size:13px;margin-bottom:6px;">✅ 複数タスクをAI部下に同時並列で処理させられる</p>
+        <p style="color:#e2e8f0;font-size:13px;margin-bottom:6px;">✅ フックでタスク完了・エラーが自動記録される</p>
+        <p style="color:#e2e8f0;font-size:13px;margin-bottom:0;">✅ 全機能を組み合わせた総合テストが通っている</p>
       </div>
 
       <hr class="divider">
@@ -391,24 +501,32 @@
       <h3 style="font-size:15px;margin-bottom:12px;text-align:left;">さらに発展させる</h3>
 
       <div class="prompt-box" onclick="copyPrompt(this)">
-        <p class="prompt-label">カスタムコマンドを作る（スキル）</p>
-        <pre>.claude/commands/ フォルダーに以下のスキルを作ってください:
+        <p class="prompt-label">プラグイン（スキル+フック+MCPをパッケージ化して共有）</p>
+        <pre>私が使っているスキル・フック・MCP設定をパッケージ化してください:
 
-1.「朝レポート」スキル（/朝レポート で実行）:
-   最新ニュース取得 → タスク整理 → 今日の優先度づけ
+1. .claude/commands/ の全スキルをリストアップして
+2. フック設定を settings.json から読み取ってまとめて
+3. MCP設定（.claude/mcp.json）を読み取って
+4. 上の3つを「ai_org_package.zip」にまとめて
+5. 別のPCでこのパッケージを展開する手順書を README.txt に書いて
 
-2.「議事録」スキル（/議事録 で実行）:
-   会議メモを渡すと → 要約・決定事項・次のアクションに整理
-
-作ったら使い方を教えて。</pre>
+これで同じAI組織を別の環境でも5分で再現できるようにする。</pre>
       </div>
 
       <div class="prompt-box" onclick="copyPrompt(this)">
-        <p class="prompt-label">フック（自動処理）を設定する</p>
-        <pre>Claude Codeのフック機能を設定してください:
-- タスクが完了したら自動でサマリーをファイルに保存する
-- エラーが出たら自動でログに記録する
-設定方法をステップバイステップで教えて、実際に設定まで。</pre>
+        <p class="prompt-label">スキルを追加する（議事録・日報・提案書）</p>
+        <pre>.claude/commands/ に以下のスキルを追加してください:
+
+1.「議事録」スキル（/議事録 で実行）:
+   会議メモを渡すと → 要約・決定事項・次のアクションに整理
+
+2.「日報」スキル（/日報 で実行）:
+   今日の作業ログを読んで → 日報フォーマットに自動整理
+
+3.「提案書」スキル（/提案書 で実行）:
+   テーマを渡すと → 構成・本文・まとめを自動生成
+
+作ったら使い方を教えて。</pre>
       </div>
 
       <div style="margin-top:20px;">
@@ -426,7 +544,7 @@
 </div>
 
 <script>
-  const steps = ['step0','step1','step2','step3','step4','step5','step6','step7','step8','stepDone'];
+  const steps = ['step0','step1','step2','step3','step4','step5','step6','step7','step8','step9','step10','step11','stepDone'];
   let currentIdx = 0;
 
   function go(id) {
