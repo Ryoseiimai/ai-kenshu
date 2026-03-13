@@ -96,6 +96,11 @@
     .copy-cmd code { flex:1; color:#22c55e; font-size:13px; }
     .copy-cmd .copy-btn { background:#334155; color:#94a3b8; border:none; border-radius:4px; padding:4px 10px; font-size:11px; cursor:pointer; white-space:nowrap; }
     .copy-cmd.copied .copy-btn { background:#22c55e; color:#fff; }
+    .step-nav { display:flex; gap:4px; justify-content:center; flex-wrap:wrap; margin-bottom:16px; }
+    .step-nav button { width:32px; height:32px; border-radius:50%; border:2px solid #334155; background:transparent; color:#64748b; font-size:12px; font-weight:700; cursor:pointer; transition:all .2s; }
+    .step-nav button:hover { border-color:#3b82f6; color:#3b82f6; }
+    .step-nav button.nav-active { background:#3b82f6; border-color:#3b82f6; color:#fff; }
+    .step-nav button.nav-done { background:#22c55e; border-color:#22c55e; color:#fff; }
   </style>
 </head>
 <body>
@@ -108,7 +113,23 @@
 
   <div class="progress-wrap">
     <div class="bar-bg"><div class="bar-fill" id="progressFill"></div></div>
-    <div class="bar-label" id="progressLabel">0 / 11</div>
+    <div class="bar-label" id="progressLabel">0 / 12</div>
+  </div>
+
+  <div class="step-nav" id="stepNav">
+    <button onclick="go('step0')" title="スタート">0</button>
+    <button onclick="go('step1')" title="アカウント作成">1</button>
+    <button onclick="go('step2')" title="デスクトップアプリ">2</button>
+    <button onclick="go('step3')" title="エディタ">3</button>
+    <button onclick="go('step4')" title="Claude Code起動">4</button>
+    <button onclick="go('step5')" title="作業フォルダー">5</button>
+    <button onclick="go('step6')" title="CLAUDE.md">6</button>
+    <button onclick="go('step7')" title="スキル">7</button>
+    <button onclick="go('step8')" title="MCP">8</button>
+    <button onclick="go('step9')" title="サブエージェント">9</button>
+    <button onclick="go('step10')" title="フック">10</button>
+    <button onclick="go('step11')" title="総合テスト">11</button>
+    <button onclick="go('stepDone')" title="完了">✓</button>
   </div>
 
   <!-- ===== STEP 0: スタート ===== -->
@@ -647,6 +668,13 @@ claude plugin add https://github.com/Shin-sibainu/cc-secretary
     const pct = Math.round((currentIdx / total) * 100);
     document.getElementById('progressFill').style.width = pct + '%';
     document.getElementById('progressLabel').textContent = currentIdx + ' / ' + total;
+    // ナビボタンのハイライト更新
+    const navBtns = document.querySelectorAll('.step-nav button');
+    navBtns.forEach((btn, i) => {
+      btn.classList.remove('nav-active', 'nav-done');
+      if (i < currentIdx) btn.classList.add('nav-done');
+      if (i === currentIdx) btn.classList.add('nav-active');
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
