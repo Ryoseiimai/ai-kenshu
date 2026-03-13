@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: "Noto Sans JP", sans-serif;
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -17,329 +16,81 @@
       justify-content: center;
       color: #fff;
     }
+    .app { width: 100%; max-width: 560px; padding: 20px; }
 
-    .app {
-      width: 100%;
-      max-width: 560px;
-      padding: 20px;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .header h1 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .header p {
-      font-size: 13px;
-      color: #94a3b8;
-    }
+    .header { text-align: center; margin-bottom: 20px; }
+    .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .header p { font-size: 13px; color: #94a3b8; }
 
     /* プログレス */
-    .progress-wrap {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .progress-wrap .bar-bg {
-      flex: 1;
-      height: 6px;
-      background: #334155;
-      border-radius: 3px;
-      overflow: hidden;
-    }
-
-    .progress-wrap .bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #3b82f6, #22c55e);
-      border-radius: 3px;
-      transition: width 0.5s ease;
-      width: 0%;
-    }
-
-    .progress-wrap .bar-label {
-      font-size: 12px;
-      color: #64748b;
-      white-space: nowrap;
-    }
+    .progress-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+    .progress-wrap .bar-bg { flex: 1; height: 6px; background: #334155; border-radius: 3px; overflow: hidden; }
+    .progress-wrap .bar-fill { height: 100%; background: linear-gradient(90deg, #3b82f6, #22c55e); border-radius: 3px; transition: width 0.5s ease; width: 0%; }
+    .progress-wrap .bar-label { font-size: 12px; color: #64748b; white-space: nowrap; }
 
     /* カード */
-    .step-card {
-      display: none;
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 16px;
-      padding: 28px 24px;
-      animation: fadeIn 0.35s ease;
-    }
-
+    .step-card { display: none; background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 28px 24px; animation: fadeIn 0.35s ease; }
     .step-card.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .step-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-bottom: 12px; }
+    .step-badge.human { background: #f97316; color: #fff; }
+    .step-badge.claude { background: #8b5cf6; color: #fff; }
 
-    .step-badge {
-      display: inline-block;
-      background: #3b82f6;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 6px;
-      margin-bottom: 12px;
-    }
-
-    .step-badge.human { background: #f97316; }
-    .step-badge.claude { background: #8b5cf6; }
-
-    .step-card h2 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .step-card p {
-      font-size: 14px;
-      color: #cbd5e1;
-      line-height: 1.7;
-      margin-bottom: 12px;
-    }
-
-    .step-card .hint {
-      font-size: 12px;
-      color: #64748b;
-      line-height: 1.6;
-    }
+    .step-card h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .step-card p { font-size: 14px; color: #cbd5e1; line-height: 1.7; margin-bottom: 12px; }
+    .step-card .hint { font-size: 12px; color: #64748b; line-height: 1.6; }
 
     /* ボタン */
-    .btn {
-      display: inline-block;
-      font-size: 15px;
-      font-weight: 700;
-      padding: 13px 36px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-      color: #fff;
-    }
-
+    .btn { display: inline-block; font-size: 15px; font-weight: 700; padding: 13px 36px; border: none; border-radius: 12px; cursor: pointer; text-decoration: none; transition: all 0.2s; color: #fff; }
     .btn:hover { transform: translateY(-2px); }
     .btn:active { transform: translateY(0); }
-
     .btn-blue { background: #3b82f6; }
-    .btn-blue:hover { background: #2563eb; box-shadow: 0 6px 20px rgba(59,130,246,0.4); }
-
+    .btn-blue:hover { box-shadow: 0 6px 20px rgba(59,130,246,0.4); }
     .btn-green { background: #22c55e; }
-    .btn-green:hover { background: #16a34a; box-shadow: 0 6px 20px rgba(34,197,94,0.4); }
-
+    .btn-green:hover { box-shadow: 0 6px 20px rgba(34,197,94,0.4); }
     .btn-purple { background: #8b5cf6; }
-    .btn-purple:hover { background: #7c3aed; box-shadow: 0 6px 20px rgba(139,92,246,0.4); }
-
+    .btn-purple:hover { box-shadow: 0 6px 20px rgba(139,92,246,0.4); }
     .btn-orange { background: #f97316; }
-    .btn-orange:hover { background: #ea580c; box-shadow: 0 6px 20px rgba(249,115,22,0.4); }
-
-    .btn-sm {
-      display: inline-block;
-      background: transparent;
-      color: #94a3b8;
-      font-size: 13px;
-      padding: 8px 18px;
-      border: 1px solid #475569;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-top: 10px;
-    }
-
-    .btn-sm:hover { color: #fff; border-color: #fff; }
-
-    .btn-back {
-      display: inline-block;
-      background: transparent;
-      color: #64748b;
-      font-size: 13px;
-      padding: 8px 16px;
-      border: none;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
+    .btn-orange:hover { box-shadow: 0 6px 20px rgba(249,115,22,0.4); }
+    .btn-back { display: inline-block; background: transparent; color: #64748b; font-size: 13px; padding: 8px 16px; border: none; cursor: pointer; transition: color 0.2s; }
     .btn-back:hover { color: #fff; }
-
     .btns { text-align: center; margin-top: 18px; }
-
     .btns-row { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
 
-    /* コピーボックス（Claudeへの指示） */
-    .prompt-box {
-      background: #0f172a;
-      border: 2px solid #8b5cf6;
-      border-radius: 12px;
-      padding: 16px 18px;
-      margin: 14px 0;
-      cursor: pointer;
-      position: relative;
-      transition: all 0.2s;
-    }
-
-    .prompt-box:hover {
-      border-color: #a78bfa;
-      box-shadow: 0 0 16px rgba(139,92,246,0.3);
-    }
-
-    .prompt-box::before {
-      content: "📋 クリックでコピー";
-      position: absolute;
-      top: -10px;
-      right: 12px;
-      background: #8b5cf6;
-      color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 4px;
-    }
-
-    .prompt-box.copied::before {
-      content: "✓ コピーしました！";
-      background: #22c55e;
-    }
-
-    .prompt-box p.prompt-label {
-      font-size: 11px;
-      color: #8b5cf6;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .prompt-box pre {
-      font-family: "Courier New", monospace;
-      font-size: 13px;
-      color: #e2e8f0;
-      white-space: pre-wrap;
-      word-break: break-all;
-      line-height: 1.6;
-      margin: 0;
-    }
+    /* コピーボックス */
+    .prompt-box { background: #0f172a; border: 2px solid #8b5cf6; border-radius: 12px; padding: 16px 18px; margin: 14px 0; cursor: pointer; position: relative; transition: all 0.2s; }
+    .prompt-box:hover { border-color: #a78bfa; box-shadow: 0 0 16px rgba(139,92,246,0.3); }
+    .prompt-box::before { content: "クリックでコピー"; position: absolute; top: -10px; right: 12px; background: #8b5cf6; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+    .prompt-box.copied::before { content: "コピーしました"; background: #22c55e; }
+    .prompt-box p.prompt-label { font-size: 11px; color: #8b5cf6; font-weight: 700; margin-bottom: 6px; }
+    .prompt-box pre { font-family: "Courier New", monospace; font-size: 13px; color: #e2e8f0; white-space: pre-wrap; word-break: break-all; line-height: 1.6; margin: 0; }
 
     /* リンクボタン */
-    .link-btn {
-      display: flex;
-      align-items: center;
-      background: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 10px;
-      padding: 14px 18px;
-      margin: 10px 0;
-      text-decoration: none;
-      color: #fff;
-      transition: all 0.2s;
-    }
-
-    .link-btn:hover {
-      border-color: #3b82f6;
-      background: #1a2744;
-    }
-
+    .link-btn { display: flex; align-items: center; background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 14px 18px; margin: 10px 0; text-decoration: none; color: #fff; transition: all 0.2s; }
+    .link-btn:hover { border-color: #3b82f6; background: #1a2744; }
     .link-btn .link-icon { font-size: 24px; margin-right: 12px; }
+    .link-btn .link-text h3 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .link-btn .link-text p { font-size: 12px; color: #94a3b8; margin: 0; }
 
-    .link-btn .link-text h3 {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
+    .check-circle { display: inline-block; width: 56px; height: 56px; background: #22c55e; border-radius: 50%; line-height: 56px; font-size: 28px; margin-bottom: 16px; }
+    .divider { border: none; border-top: 1px solid #334155; margin: 16px 0; }
 
-    .link-btn .link-text p {
-      font-size: 12px;
-      color: #94a3b8;
-      margin: 0;
-    }
-
-    /* 完了 */
-    .check-circle {
-      display: inline-block;
-      width: 56px;
-      height: 56px;
-      background: #22c55e;
-      border-radius: 50%;
-      line-height: 56px;
-      font-size: 28px;
-      margin-bottom: 16px;
-    }
-
-    .example-list {
-      background: #0f172a;
-      border-radius: 10px;
-      padding: 16px 20px;
-      margin: 14px 0;
-      text-align: left;
-    }
-
-    .example-list p.ex-label {
-      color: #64748b;
-      font-size: 11px;
-      margin-bottom: 8px;
-    }
-
-    .example-list p.ex-item {
-      color: #fff;
-      font-size: 14px;
-      margin-bottom: 5px;
-      padding-left: 8px;
-      border-left: 3px solid #3b82f6;
-    }
-
-    .divider {
-      border: none;
-      border-top: 1px solid #334155;
-      margin: 16px 0;
-    }
-
-    .flow-arrow {
-      text-align: center;
-      color: #475569;
-      font-size: 20px;
-      margin: 6px 0;
-    }
-
-    /* アコーディオン */
-    .accordion {
-      background: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 8px;
-      margin: 10px 0;
-      overflow: hidden;
-    }
-
-    .accordion summary {
-      padding: 10px 14px;
-      font-size: 13px;
-      color: #94a3b8;
-      cursor: pointer;
-      list-style: none;
-    }
-
+    .accordion { background: #0f172a; border: 1px solid #334155; border-radius: 8px; margin: 10px 0; overflow: hidden; }
+    .accordion summary { padding: 10px 14px; font-size: 13px; color: #94a3b8; cursor: pointer; list-style: none; }
     .accordion summary::-webkit-details-marker { display: none; }
     .accordion summary::before { content: "▸ "; }
     .accordion[open] summary::before { content: "▾ "; }
+    .accordion .acc-body { padding: 0 14px 12px; font-size: 12px; color: #64748b; line-height: 1.6; }
 
-    .accordion .acc-body {
-      padding: 0 14px 12px;
-      font-size: 12px;
-      color: #64748b;
-      line-height: 1.6;
-    }
+    /* ロードマップ */
+    .roadmap { text-align: left; margin: 16px 0; }
+    .roadmap-item { display: flex; align-items: flex-start; margin-bottom: 6px; padding: 8px 12px; border-radius: 8px; font-size: 13px; }
+    .roadmap-item.done { background: rgba(34,197,94,0.1); color: #22c55e; }
+    .roadmap-item.current { background: rgba(59,130,246,0.15); color: #3b82f6; font-weight: 700; }
+    .roadmap-item.upcoming { color: #475569; }
+    .roadmap-item .rm-icon { width: 22px; text-align: center; margin-right: 8px; flex-shrink: 0; }
+    .roadmap-item .rm-text { flex: 1; }
   </style>
 </head>
 <body>
@@ -347,224 +98,276 @@
 <div class="app">
   <div class="header">
     <h1>Claude Code セットアップ</h1>
-    <p>ボタンを押す → Claudeに貼る → 終わり。</p>
+    <p>ゴール：AIエージェント集団を自分の指示で動かせる状態にする</p>
   </div>
 
   <div class="progress-wrap">
     <div class="bar-bg"><div class="bar-fill" id="progressFill"></div></div>
-    <div class="bar-label" id="progressLabel">0 / 6</div>
+    <div class="bar-label" id="progressLabel">0 / 8</div>
   </div>
 
   <!-- ===== STEP 0: スタート ===== -->
   <div class="step-card active" id="step0">
     <div style="text-align:center;">
-      <h2 style="font-size:20px;margin-bottom:14px;">4ステップで完了</h2>
-      <div style="display:flex;gap:6px;justify-content:center;margin-bottom:20px;">
-        <div style="flex:1;background:#0f172a;border-radius:10px;padding:12px 8px;">
-          <div style="font-size:22px;margin-bottom:4px;">📥</div>
-          <div style="font-size:11px;color:#94a3b8;">Claudeを入れる</div>
+      <h2 style="font-size:18px;margin-bottom:16px;">これからやること</h2>
+      <div class="roadmap" id="roadmapStart">
+        <div class="roadmap-item current">
+          <span class="rm-icon">①</span>
+          <span class="rm-text">Claudeアカウント作成 + Proプラン登録</span>
         </div>
-        <div style="flex:0;display:flex;align-items:center;color:#475569;">→</div>
-        <div style="flex:1;background:#0f172a;border-radius:10px;padding:12px 8px;">
-          <div style="font-size:22px;margin-bottom:4px;">📝</div>
-          <div style="font-size:11px;color:#94a3b8;">Cursorを入れる</div>
+        <div class="roadmap-item upcoming">
+          <span class="rm-icon">②</span>
+          <span class="rm-text">Claudeデスクトップアプリをインストール</span>
         </div>
-        <div style="flex:0;display:flex;align-items:center;color:#475569;">→</div>
-        <div style="flex:1;background:#0f172a;border-radius:10px;padding:12px 8px;">
-          <div style="font-size:22px;margin-bottom:4px;">📋</div>
-          <div style="font-size:11px;color:#94a3b8;">指示をコピペ</div>
+        <div class="roadmap-item upcoming">
+          <span class="rm-icon">③</span>
+          <span class="rm-text">Cursor（コードエディタ）をインストール</span>
         </div>
-        <div style="flex:0;display:flex;align-items:center;color:#475569;">→</div>
-        <div style="flex:1;background:#0f172a;border-radius:10px;padding:12px 8px;">
-          <div style="font-size:22px;margin-bottom:4px;">🎉</div>
-          <div style="font-size:11px;color:#94a3b8;">全部できてる</div>
+        <div class="roadmap-item upcoming">
+          <span class="rm-icon">④</span>
+          <span class="rm-text">Claude Codeを起動する</span>
+        </div>
+        <div class="roadmap-item upcoming">
+          <span class="rm-icon">⑤</span>
+          <span class="rm-text">作業フォルダーと初期設定を作る</span>
+        </div>
+        <div class="roadmap-item upcoming">
+          <span class="rm-icon">⑥</span>
+          <span class="rm-text">指示書（CLAUDE.md）でAIの役割を定義する</span>
+        </div>
+        <div class="roadmap-item upcoming">
+          <span class="rm-icon">⑦</span>
+          <span class="rm-text">サブエージェント（AI部下）を動かしてみる</span>
+        </div>
+        <div class="roadmap-item upcoming">
+          <span class="rm-icon">⑧</span>
+          <span class="rm-text">外部ツール連携（Gmail・カレンダー等）</span>
         </div>
       </div>
-      <p style="font-size:13px;color:#64748b;margin-bottom:20px;">
-        Claude + Cursor を入れたら、残りは全部Claudeがやってくれます。<br>
-        あなたはこのページの指示をコピーして貼るだけ。
-      </p>
+      <p style="font-size:12px;color:#475569;margin:12px 0;">完了すると：AIエージェントのチームがあなたの指示で動く状態になります</p>
       <button class="btn btn-blue" onclick="go('step1')">はじめる →</button>
     </div>
   </div>
 
-  <!-- ===== STEP 1: Claudeアカウント ===== -->
+  <!-- ===== STEP 1: アカウント + Proプラン ===== -->
   <div class="step-card" id="step1">
     <span class="step-badge human">あなたがやること</span>
-    <h2>① Claudeアカウントを作る</h2>
-    <p>下のボタンでサイトが開きます。<br>メールアドレスかGoogleで登録。1分で終わります。</p>
+    <h2>① アカウント作成 + Proプラン</h2>
 
     <a href="https://claude.ai" target="_blank" class="link-btn">
       <span class="link-icon">🌐</span>
       <span class="link-text">
         <h3>claude.ai を開く</h3>
-        <p>アカウント作成ページが開きます</p>
+        <p>メールアドレスかGoogleで登録 → 左下「アップグレード」→ Pro($20/月)</p>
       </span>
     </a>
 
     <details class="accordion">
-      <summary>もうアカウント持ってる人</summary>
-      <div class="acc-body">そのまま次へ進んでOKです。</div>
+      <summary>APIキー（使った分だけ課金）でもOK</summary>
+      <div class="acc-body">
+        <a href="https://console.anthropic.com/" target="_blank" style="color:#3b82f6;">console.anthropic.com</a> → $5クレジット購入 → APIキー発行。1日100〜500円が目安。
+      </div>
+    </details>
+    <details class="accordion">
+      <summary>もうアカウント+Proプラン持ってる</summary>
+      <div class="acc-body">そのまま次へ進んでOK。</div>
     </details>
 
     <div class="btns-row">
       <button class="btn-back" onclick="go('step0')">← 戻る</button>
-      <button class="btn btn-green" onclick="go('step2')">作った → 次へ</button>
+      <button class="btn btn-green" onclick="go('step2')">できた → 次へ</button>
     </div>
   </div>
 
-  <!-- ===== STEP 2: Proプラン + ダウンロード ===== -->
+  <!-- ===== STEP 2: デスクトップアプリ ===== -->
   <div class="step-card" id="step2">
     <span class="step-badge human">あなたがやること</span>
-    <h2>② プラン選択 + アプリをダウンロード</h2>
-
-    <p>Claude Codeを使うには<strong>有料プラン</strong>か<strong>APIキー</strong>が必要です。</p>
-
-    <a href="https://claude.ai" target="_blank" class="link-btn">
-      <span class="link-icon">💳</span>
-      <span class="link-text">
-        <h3>おすすめ：Proプラン（月$20 ≒ 3,000円）</h3>
-        <p>左下メニュー →「プランをアップグレード」→「Pro」</p>
-      </span>
-    </a>
-
-    <details class="accordion">
-      <summary>もう1つの方法：APIキー（使った分だけ課金）</summary>
-      <div class="acc-body">
-        <a href="https://console.anthropic.com/" target="_blank" style="color:#3b82f6;">console.anthropic.com</a> でアカウント作成 → $5クレジット購入 → APIキー発行。<br>
-        少しだけ試したい人向け。1日100〜500円が目安。
-      </div>
-    </details>
-
-    <hr class="divider">
+    <h2>② Claudeアプリをインストール</h2>
 
     <a href="https://claude.ai/download" target="_blank" class="link-btn">
       <span class="link-icon">📥</span>
       <span class="link-text">
-        <h3>アプリをダウンロード</h3>
-        <p>Windows / Mac を選んでインストール</p>
+        <h3>ダウンロードページを開く</h3>
+        <p>Windows / Mac を選んでダウンロード → 開いて「次へ」連打</p>
       </span>
     </a>
 
-    <p class="hint">ダウンロードしたファイルを開いて「次へ」を押し続けるだけ。</p>
+    <p class="hint">インストール後、アプリを起動 →「始める」→ ログイン。</p>
 
     <details class="accordion">
-      <summary>もうProプラン+アプリ持ってる人</summary>
-      <div class="acc-body">そのまま次へ進んでOKです。</div>
+      <summary>もうインストール済み</summary>
+      <div class="acc-body">そのまま次へ。</div>
     </details>
 
     <div class="btns-row">
       <button class="btn-back" onclick="go('step1')">← 戻る</button>
-      <button class="btn btn-green" onclick="go('step3')">インストールした → 次へ</button>
+      <button class="btn btn-green" onclick="go('step3')">できた → 次へ</button>
     </div>
   </div>
 
-  <!-- ===== STEP 3: Cursorをダウンロード ===== -->
+  <!-- ===== STEP 3: Cursor ===== -->
   <div class="step-card" id="step3">
     <span class="step-badge human">あなたがやること</span>
-    <h2>③ Cursor（エディタ）をダウンロード</h2>
+    <h2>③ Cursor をインストール</h2>
 
-    <p>Claude Codeを快適に使うための<strong>作業場所</strong>です。<br>
-    ターミナル（黒い画面）が内蔵されていて、ここからClaudeに指示を出します。</p>
+    <p>Claude Codeの<strong>作業場所</strong>になるエディタです。<br>ターミナル（黒い画面）が内蔵されていて、ここからAIに指示を出します。</p>
 
     <a href="https://www.cursor.com/" target="_blank" class="link-btn">
       <span class="link-icon">📝</span>
       <span class="link-text">
         <h3>Cursor をダウンロード</h3>
-        <p>cursor.com → 「Download」ボタンを押すだけ</p>
+        <p>cursor.com →「Download」→ インストール</p>
       </span>
     </a>
 
-    <div style="background:#0f172a;border-radius:10px;padding:16px;margin:14px 0;">
-      <p style="margin-bottom:8px;"><strong style="color:#3b82f6;">1.</strong> ダウンロードしたファイルを開いてインストール</p>
-      <p style="margin-bottom:8px;"><strong style="color:#3b82f6;">2.</strong> Cursorを起動</p>
-      <p style="margin-bottom:0;"><strong style="color:#3b82f6;">3.</strong> 上メニューの「Terminal」→「New Terminal」でターミナルを開く</p>
-    </div>
-
-    <p class="hint">ターミナル（黒い画面）が下に表示されたら成功。<br>ここにClaudeへの指示を入力していきます。</p>
-
     <details class="accordion">
       <summary>VS Code を使いたい人</summary>
-      <div class="acc-body">
-        VS Code でもOKです。<a href="https://code.visualstudio.com/" target="_blank" style="color:#3b82f6;">code.visualstudio.com</a> からダウンロード。<br>
-        同じように「Terminal」→「New Terminal」でターミナルを開けます。
-      </div>
+      <div class="acc-body"><a href="https://code.visualstudio.com/" target="_blank" style="color:#3b82f6;">code.visualstudio.com</a> からダウンロード。同じように使えます。</div>
     </details>
 
     <div class="btns-row">
       <button class="btn-back" onclick="go('step2')">← 戻る</button>
-      <button class="btn btn-green" onclick="go('step4')">Cursorを開いた → 次へ</button>
+      <button class="btn btn-green" onclick="go('step4')">できた → 次へ</button>
     </div>
   </div>
 
-  <!-- ===== STEP 4: ターミナルからClaude Code起動 ===== -->
+  <!-- ===== STEP 4: Claude Code 起動 ===== -->
   <div class="step-card" id="step4">
-    <span class="step-badge claude">Claudeにやってもらう</span>
-    <h2>④ Cursorのターミナルで指示を出す</h2>
-    <p>下の紫ボックスをクリック → コピーされる → <br>Cursorのターミナルに貼り付けてEnter。</p>
+    <span class="step-badge human">あなたがやること</span>
+    <h2>④ Claude Code を起動する</h2>
 
-    <div class="prompt-box" onclick="copyPrompt(this)">
-      <p class="prompt-label">まずClaude Codeを起動</p>
-      <pre>claude</pre>
+    <div style="background:#0f172a;border-radius:10px;padding:16px;margin-bottom:14px;">
+      <p style="margin-bottom:8px;"><strong style="color:#3b82f6;">1.</strong> Cursorを開く</p>
+      <p style="margin-bottom:8px;"><strong style="color:#3b82f6;">2.</strong> 上メニュー「Terminal」→「New Terminal」</p>
+      <p style="margin-bottom:0;"><strong style="color:#3b82f6;">3.</strong> ターミナルに <code style="background:#334155;padding:2px 6px;border-radius:4px;">claude</code> と入力してEnter</p>
     </div>
 
-    <p class="hint">初回はブラウザが開いて「承認する」ボタンが出ます。クリックしてください。<br>入力待ちの画面になったら準備OK。次の指示をコピペします。</p>
-
-    <hr class="divider">
-
-    <div class="prompt-box" onclick="copyPrompt(this)">
-      <p class="prompt-label">Claudeへの指示（環境構築を全部やらせる）</p>
-      <pre>以下の環境構築を全部やってください:
-
-1. Node.js がインストールされているか確認して、なければインストールして
-2. デスクトップに「AI作業フォルダー」を作って
-3. このフォルダーの中で /init を実行して CLAUDE.md を作って
-
-日本語で答えてね。</pre>
-    </div>
-
-    <p class="hint">Claudeが自動でNode.jsのチェック → フォルダー作成 → 初期設定をやってくれます。<br>数分かかる場合があります。終わるまで待ってください。</p>
+    <p class="hint">初回はブラウザが開いて「承認する」ボタンが出ます → クリック。<br>入力待ちの画面が出たら成功。ここからはClaudeにコピペで指示を出していきます。</p>
 
     <details class="accordion">
-      <summary>うまくいかない場合</summary>
+      <summary>「claude」が見つからないと出た場合</summary>
       <div class="acc-body">
-        エラーが出たら、そのエラーメッセージをそのままターミナルに貼り付けてください。<br>
-        「このエラー直して」だけでOK。Claudeが自分で解決します。
+        Node.jsが入ってない可能性があります。次のステップでClaudeに自動インストールさせるので、そのまま進んでOKです。
       </div>
     </details>
 
     <div class="btns-row">
       <button class="btn-back" onclick="go('step3')">← 戻る</button>
-      <button class="btn btn-green" onclick="go('step5')">Claudeがやってくれた → 次へ</button>
+      <button class="btn btn-purple" onclick="go('step5')">起動できた → 次へ</button>
     </div>
   </div>
 
-  <!-- ===== STEP 5: Claudeに指示（テスト） ===== -->
+  <!-- ===== STEP 5: 作業フォルダー + 初期設定 ===== -->
   <div class="step-card" id="step5">
     <span class="step-badge claude">Claudeにやってもらう</span>
-    <h2>⑤ 動作テスト：何か作ってみよう</h2>
-    <p>好きなのをコピーして貼ってみてください。<br>Claudeが実際に作って納品してくれます。</p>
+    <h2>⑤ 作業フォルダーと初期設定を作る</h2>
+    <p>紫ボックスをクリック → コピーされる → ターミナルに貼ってEnter。</p>
 
     <div class="prompt-box" onclick="copyPrompt(this)">
-      <p class="prompt-label">お試し指示 A（ゲーム）</p>
-      <pre>テトリスを作って。ブラウザで遊べるやつ。完成したら自動で開いて。</pre>
+      <p class="prompt-label">Claudeへの指示</p>
+      <pre>以下をやってください:
+1. Node.js がなければインストールして
+2. デスクトップに「AI作業フォルダー」を作って
+3. そのフォルダーに移動して /init を実行して
+日本語で答えてね。</pre>
     </div>
 
-    <div class="prompt-box" onclick="copyPrompt(this)">
-      <p class="prompt-label">お試し指示 B（業務ツール）</p>
-      <pre>今日のTodoリストを管理するウェブアプリを作って。追加・完了チェック・削除ができるやつ。完成したら開いて。</pre>
-    </div>
-
-    <div class="prompt-box" onclick="copyPrompt(this)">
-      <p class="prompt-label">お試し指示 C（調査）</p>
-      <pre>AIエージェントの最新ニュースを5つ調べて、日本語で要約して。</pre>
-    </div>
-
-    <p class="hint">何かが出来上がったら成功です。おめでとう！</p>
+    <p class="hint">Claudeが自動でフォルダー作成 → 初期設定まで全部やってくれます。<br>
+    <strong>これで「CLAUDE.md」という指示書ファイルが作られます。</strong>次のステップでこの指示書を書きます。</p>
 
     <div class="btns-row">
       <button class="btn-back" onclick="go('step4')">← 戻る</button>
-      <button class="btn btn-green" onclick="go('stepDone')">できた！ 🎉</button>
+      <button class="btn btn-green" onclick="go('step6')">できた → 次へ</button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 6: CLAUDE.md で役割定義 ===== -->
+  <div class="step-card" id="step6">
+    <span class="step-badge claude">Claudeにやってもらう</span>
+    <h2>⑥ AIの役割を定義する（指示書）</h2>
+    <p>CLAUDE.mdに「あなたは何者で、何をすべきか」を書きます。<br>これがAI組織の<strong>設計図</strong>になります。</p>
+
+    <div class="prompt-box" onclick="copyPrompt(this)">
+      <p class="prompt-label">Claudeへの指示（AI組織の設計図を作る）</p>
+      <pre>CLAUDE.md に以下の内容を書いてください:
+
+# AI組織 設定
+あなたはCEO（最高執行責任者）として動いてください。
+私（人間）は社長です。方針だけ出します。実行は全部あなたがやってください。
+
+## ルール
+- 報告は必ず箇条書きで簡潔に
+- 専門用語は使わず、わかりやすく説明する
+- 外部への送信は私の確認が必要
+- タスクが複数あるときはサブエージェントに振って並列処理する
+- 毎回「次にやるべきこと」を提案する
+
+## 部署構成
+- 秘書: タスク管理・スケジュール・リマインド
+- リサーチ: 情報収集・競合調査・ニュース要約
+- マーケ: SNS投稿・記事作成・コンテンツ企画
+- 開発: コード作成・自動化・ツール構築
+- 経理: 請求書・経費・数字の管理
+
+保存したら「設定完了」と教えてください。</pre>
+    </div>
+
+    <p class="hint">これで<strong>Claudeが毎回この設計図を自動で読み込んで動く</strong>ようになります。<br>起動するたびに「社長、何をしますか？」という状態になります。</p>
+
+    <div class="btns-row">
+      <button class="btn-back" onclick="go('step5')">← 戻る</button>
+      <button class="btn btn-green" onclick="go('step7')">できた → 次へ</button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 7: サブエージェントを動かす ===== -->
+  <div class="step-card" id="step7">
+    <span class="step-badge claude">Claudeにやってもらう</span>
+    <h2>⑦ AI部下（サブエージェント）を動かす</h2>
+    <p>CEOのClaudeが<strong>別のAIに仕事を振って並列で処理</strong>します。<br>これが「AI組織」の本質です。試してみましょう。</p>
+
+    <div class="prompt-box" onclick="copyPrompt(this)">
+      <p class="prompt-label">Claudeへの指示（サブエージェントで実行）</p>
+      <pre>以下の3つのタスクをサブエージェントに振って、並列で同時に実行してください:
+
+1. リサーチ部: 「AIエージェント」の最新ニュースを3つ調べてまとめて
+2. マーケ部: 上のニュースを元にSNS投稿文を3パターン作って
+3. 開発部: 「今日のタスクリスト」を管理するHTMLアプリを作って
+
+全部終わったらまとめて報告してください。</pre>
+    </div>
+
+    <p class="hint">3つのタスクが<strong>同時並行で</strong>進みます。数分で全部の結果が返ってきます。<br>これが1人でやるのと組織で回すのとの違いです。</p>
+
+    <div class="btns-row">
+      <button class="btn-back" onclick="go('step6')">← 戻る</button>
+      <button class="btn btn-green" onclick="go('step8')">できた → 次へ</button>
+    </div>
+  </div>
+
+  <!-- ===== STEP 8: MCP外部ツール連携 ===== -->
+  <div class="step-card" id="step8">
+    <span class="step-badge claude">Claudeにやってもらう</span>
+    <h2>⑧ 外部ツールと連携する（MCP）</h2>
+    <p>Gmail・Googleカレンダー・Notionなどと繋げて、<br>AIが<strong>実際にメールを読んだり予定を入れたり</strong>できるようにします。</p>
+
+    <div class="prompt-box" onclick="copyPrompt(this)">
+      <p class="prompt-label">Claudeへの指示（MCP設定）</p>
+      <pre>以下の外部ツール連携（MCP）を設定してください:
+
+1. まずMCPとは何かを簡単に説明して
+2. Gmail と連携する手順を教えて（実際に設定まで）
+3. Googleカレンダーと連携する手順を教えて
+4. 設定が終わったら「カレンダーの今週の予定を教えて」を実行してテストして
+
+日本語でステップバイステップでお願いします。</pre>
+    </div>
+
+    <p class="hint">MCPは「AIと外部サービスをつなぐコンセント」のようなもの。<br>一度設定すれば「メール確認して」「予定入れて」が日本語で通じるようになります。</p>
+
+    <div class="btns-row">
+      <button class="btn-back" onclick="go('step7')">← 戻る</button>
+      <button class="btn btn-green" onclick="go('stepDone')">できた → 完了！</button>
     </div>
   </div>
 
@@ -572,62 +375,40 @@
   <div class="step-card" id="stepDone">
     <div style="text-align:center;">
       <div class="check-circle">✓</div>
-      <h2>セットアップ完了！</h2>
-      <p>これであなたのPCに<strong>AI部下</strong>がいます。<br>日本語で何でもお願いしてみてください。</p>
+      <h2>AIエージェント組織が完成！</h2>
+      <p>あなたの指示で動く<strong>AI社員チーム</strong>ができました。</p>
+
+      <div style="background:#0f172a;border-radius:12px;padding:18px;margin:16px 0;text-align:left;">
+        <p style="color:#22c55e;font-size:13px;font-weight:700;margin-bottom:10px;">今できるようになったこと:</p>
+        <p style="color:#e2e8f0;font-size:13px;margin-bottom:6px;">✅ AIに日本語で何でも指示できる</p>
+        <p style="color:#e2e8f0;font-size:13px;margin-bottom:6px;">✅ 複数タスクをAI部下に同時並列で処理させられる</p>
+        <p style="color:#e2e8f0;font-size:13px;margin-bottom:6px;">✅ Gmail・カレンダーなど外部ツールとAIが連携している</p>
+        <p style="color:#e2e8f0;font-size:13px;margin-bottom:0;">✅ 起動するたびにAIが設計図を読んで「社長、何しますか？」状態</p>
+      </div>
 
       <hr class="divider">
 
-      <h3 style="font-size:15px;margin-bottom:12px;text-align:left;">次のステップ</h3>
+      <h3 style="font-size:15px;margin-bottom:12px;text-align:left;">さらに発展させる</h3>
 
       <div class="prompt-box" onclick="copyPrompt(this)">
-        <p class="prompt-label">もっと使いこなす：秘書AIを作る</p>
-        <pre>あなたは私の秘書AIです。CLAUDE.mdに以下を書いてください:
-- 報告は箇条書き
-- 専門用語は使わない
-- 毎回「次にやるべきこと」を提案して
-これを保存して、今後ずっとこのルールで動いて。</pre>
-      </div>
+        <p class="prompt-label">カスタムコマンドを作る（スキル）</p>
+        <pre>.claude/commands/ フォルダーに以下のスキルを作ってください:
 
-      <div class="prompt-box" onclick="copyPrompt(this)">
-        <p class="prompt-label">もっと使いこなす：外部ツール連携（MCP）</p>
-        <pre>Googleカレンダー、Gmail、NotionとClaude Codeを連携する方法を教えて。MCPの設定手順を日本語で。</pre>
-      </div>
+1.「朝レポート」スキル（/朝レポート で実行）:
+   最新ニュース取得 → タスク整理 → 今日の優先度づけ
 
-      <div class="prompt-box" onclick="copyPrompt(this)">
-        <p class="prompt-label">上級：AI組織を作る（サブエージェント）</p>
-        <pre>Claude Codeで「AI会社組織」を構築してください。
-
-1. CLAUDE.mdに以下の組織構成を書いて:
-   - 社長（あなた=Claude Code）：全体統括・判断
-   - 秘書：タスク管理・スケジュール
-   - リサーチ部：情報収集・要約
-   - マーケ部：SNS・コンテンツ作成
-   - 開発部：コード・自動化
-
-2. 各部署の役割と報告ルールを定義して
-
-3. サブエージェント（Agent tool）で部下に仕事を振る仕組みを作って
-   - 独立したタスクは並列で処理
-   - 結果は必ずファイルに保存
-
-4. テストとして「今日のAIニュースを3つ調べてまとめて」をサブエージェントに委任して実行して
-
-日本語で。完了したら組織図を見せて。</pre>
-      </div>
-
-      <div class="prompt-box" onclick="copyPrompt(this)">
-        <p class="prompt-label">上級：スキル（カスタムコマンド）を作る</p>
-        <pre>Claude Codeのスキル（カスタムスラッシュコマンド）を作ってください。
-
-1. .claude/commands/ フォルダーを作って
-2. 「朝レポート」スキルを作って:
-   - /朝レポート と打つと実行される
-   - 最新ニュース取得 → タスク整理 → 今日の優先度づけ を自動実行
-3. 「議事録」スキルを作って:
-   - /議事録 と打つと実行される
-   - 会議メモを渡すと → 要約・決定事項・次のアクションに整理
+2.「議事録」スキル（/議事録 で実行）:
+   会議メモを渡すと → 要約・決定事項・次のアクションに整理
 
 作ったら使い方を教えて。</pre>
+      </div>
+
+      <div class="prompt-box" onclick="copyPrompt(this)">
+        <p class="prompt-label">フック（自動処理）を設定する</p>
+        <pre>Claude Codeのフック機能を設定してください:
+- タスクが完了したら自動でサマリーをファイルに保存する
+- エラーが出たら自動でログに記録する
+設定方法をステップバイステップで教えて、実際に設定まで。</pre>
       </div>
 
       <div style="margin-top:20px;">
@@ -637,7 +418,7 @@
       <p style="margin-top:16px;font-size:11px;color:#475569;">
         参考動画:
         <a href="https://www.youtube.com/watch?v=-xla8NqooJU" target="_blank" style="color:#64748b;">Claude Code完全入門</a> /
-        <a href="https://www.youtube.com/watch?v=cfoE_8Llde0" target="_blank" style="color:#64748b;">会社経営してみた</a>
+        <a href="https://www.youtube.com/watch?v=cfoE_8Llde0" target="_blank" style="color:#64748b;">AI組織で会社経営してみた</a>
       </p>
     </div>
   </div>
@@ -645,20 +426,17 @@
 </div>
 
 <script>
-  const steps = ['step0','step1','step2','step3','step4','step5','stepDone'];
-  const totalSteps = steps.length - 1; // 6
+  const steps = ['step0','step1','step2','step3','step4','step5','step6','step7','step8','stepDone'];
   let currentIdx = 0;
 
   function go(id) {
     document.querySelectorAll('.step-card').forEach(el => el.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     currentIdx = steps.indexOf(id);
-
-    // プログレス更新
-    const pct = Math.round((currentIdx / (steps.length - 1)) * 100);
+    const total = steps.length - 1;
+    const pct = Math.round((currentIdx / total) * 100);
     document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressLabel').textContent = currentIdx + ' / ' + (steps.length - 1);
-
+    document.getElementById('progressLabel').textContent = currentIdx + ' / ' + total;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
