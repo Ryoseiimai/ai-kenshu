@@ -604,11 +604,27 @@
         <div class="copy-cmd" onclick="copyCmd(this)"><code>/plugin install company@cc-company</code><button class="copy-btn">コピー</button></div>
 
         <div style="background:#1e293b;border:1px solid #f59e0b;border-radius:8px;padding:12px;margin:8px 0;">
-          <p style="font-size:12px;color:#fbbf24;margin-bottom:6px;">⚠️ <strong>「スコープを選んでください」と聞かれたら:</strong></p>
-          <p style="font-size:11px;color:#cbd5e1;margin-bottom:4px;"><strong>Install for you (user scope)</strong> → 自分専用。どのプロジェクトでも使える。<strong>迷ったらこれ</strong></p>
-          <p style="font-size:11px;color:#cbd5e1;margin-bottom:4px;"><strong>Install for all collaborators (project scope)</strong> → チーム共有。設定がプロジェクト内に保存されて全員に反映</p>
-          <p style="font-size:11px;color:#cbd5e1;margin-bottom:0;"><strong>Install for you, in this repo only (local scope)</strong> → このプロジェクトだけ・自分だけ</p>
+          <p style="font-size:12px;color:#fbbf24;margin-bottom:8px;">⚠️ <strong>「スコープを選んでください」と聞かれたら:</strong></p>
+          <p style="font-size:12px;color:#cbd5e1;margin-bottom:6px;"><strong style="color:#22c55e;">Install for you (user scope)</strong> → PC全体で自分専用。どのプロジェクトでも使える。<strong style="color:#22c55e;">迷ったらこれ</strong></p>
+          <p style="font-size:12px;color:#cbd5e1;margin-bottom:6px;"><strong>Install for all collaborators (project scope)</strong> → チーム共有。設定ファイルがプロジェクト内に作られて、チーム全員に同じ設定が反映される</p>
+          <p style="font-size:12px;color:#cbd5e1;margin-bottom:10px;"><strong>Install for you, in this repo only (local scope)</strong> → このプロジェクトだけ・自分だけ。他メンバーの設定は汚さない</p>
+
+          <p style="font-size:11px;color:#fbbf24;margin-bottom:6px;"><strong>かんたんな選び方:</strong></p>
+          <p style="font-size:11px;color:#94a3b8;margin-bottom:3px;">🙋 自分だけが便利になればいい → <strong style="color:#cbd5e1;">User Scope</strong></p>
+          <p style="font-size:11px;color:#94a3b8;margin-bottom:3px;">👥 チーム全員に同じ動きをしてほしい → <strong style="color:#cbd5e1;">Project Scope</strong></p>
+          <p style="font-size:11px;color:#94a3b8;margin-bottom:0;">📁 このプロジェクト限定だけど共有は不要 → <strong style="color:#cbd5e1;">Local Scope</strong></p>
         </div>
+
+        <details class="accordion">
+          <summary>Project Scopeを選んだ場合のチーム共有手順</summary>
+          <div class="acc-body">
+            <p style="margin-bottom:6px;"><strong>1.</strong> Project Scopeを選択してEnter</p>
+            <p style="margin-bottom:6px;"><strong>2.</strong> プロジェクトフォルダ内に設定ファイルが自動生成される</p>
+            <p style="margin-bottom:6px;"><strong>3.</strong> Gitで管理する:</p>
+            <div class="copy-cmd" onclick="copyCmd(this)" style="margin-bottom:4px;"><code>git add . && git commit -m "add plugin settings" && git push</code><button class="copy-btn">コピー</button></div>
+            <p style="margin-bottom:0;"><strong>4.</strong> 他のメンバーが <code style="background:#334155;padding:1px 4px;border-radius:3px;">git pull</code> すれば同じプラグイン設定が有効になる</p>
+          </div>
+        </details>
 
         <p style="font-size:11px;color:#f87171;margin-bottom:2px;">▼ ステップ3: <strong>Claude Codeを一度終了して再起動する</strong></p>
         <p style="font-size:11px;color:#94a3b8;margin-bottom:8px;">ターミナルで <code style="background:#334155;padding:1px 4px;border-radius:3px;">/exit</code> → もう一度 <code style="background:#334155;padding:1px 4px;border-radius:3px;">claude</code> で起動し直してください。再起動しないとプラグインが反映されません。</p>
