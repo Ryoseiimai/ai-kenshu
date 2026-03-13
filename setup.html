@@ -352,31 +352,36 @@
 
   <div class="progress-wrap">
     <div class="bar-bg"><div class="bar-fill" id="progressFill"></div></div>
-    <div class="bar-label" id="progressLabel">0 / 5</div>
+    <div class="bar-label" id="progressLabel">0 / 6</div>
   </div>
 
   <!-- ===== STEP 0: スタート ===== -->
   <div class="step-card active" id="step0">
     <div style="text-align:center;">
-      <h2 style="font-size:20px;margin-bottom:14px;">3ステップで完了</h2>
-      <div style="display:flex;gap:8px;justify-content:center;margin-bottom:20px;">
-        <div style="flex:1;background:#0f172a;border-radius:10px;padding:14px 10px;">
-          <div style="font-size:24px;margin-bottom:4px;">📥</div>
-          <div style="font-size:12px;color:#94a3b8;">Claudeを入れる</div>
+      <h2 style="font-size:20px;margin-bottom:14px;">4ステップで完了</h2>
+      <div style="display:flex;gap:6px;justify-content:center;margin-bottom:20px;">
+        <div style="flex:1;background:#0f172a;border-radius:10px;padding:12px 8px;">
+          <div style="font-size:22px;margin-bottom:4px;">📥</div>
+          <div style="font-size:11px;color:#94a3b8;">Claudeを入れる</div>
         </div>
         <div style="flex:0;display:flex;align-items:center;color:#475569;">→</div>
-        <div style="flex:1;background:#0f172a;border-radius:10px;padding:14px 10px;">
-          <div style="font-size:24px;margin-bottom:4px;">📋</div>
-          <div style="font-size:12px;color:#94a3b8;">指示をコピペ</div>
+        <div style="flex:1;background:#0f172a;border-radius:10px;padding:12px 8px;">
+          <div style="font-size:22px;margin-bottom:4px;">📝</div>
+          <div style="font-size:11px;color:#94a3b8;">Cursorを入れる</div>
         </div>
         <div style="flex:0;display:flex;align-items:center;color:#475569;">→</div>
-        <div style="flex:1;background:#0f172a;border-radius:10px;padding:14px 10px;">
-          <div style="font-size:24px;margin-bottom:4px;">🎉</div>
-          <div style="font-size:12px;color:#94a3b8;">全部できてる</div>
+        <div style="flex:1;background:#0f172a;border-radius:10px;padding:12px 8px;">
+          <div style="font-size:22px;margin-bottom:4px;">📋</div>
+          <div style="font-size:11px;color:#94a3b8;">指示をコピペ</div>
+        </div>
+        <div style="flex:0;display:flex;align-items:center;color:#475569;">→</div>
+        <div style="flex:1;background:#0f172a;border-radius:10px;padding:12px 8px;">
+          <div style="font-size:22px;margin-bottom:4px;">🎉</div>
+          <div style="font-size:11px;color:#94a3b8;">全部できてる</div>
         </div>
       </div>
       <p style="font-size:13px;color:#64748b;margin-bottom:20px;">
-        Claudeさえ入れれば、残りは全部Claudeがやってくれます。<br>
+        Claude + Cursor を入れたら、残りは全部Claudeがやってくれます。<br>
         あなたはこのページの指示をコピーして貼るだけ。
       </p>
       <button class="btn btn-blue" onclick="go('step1')">はじめる →</button>
@@ -454,33 +459,61 @@
     </div>
   </div>
 
-  <!-- ===== STEP 3: 起動 + Claude Code開く ===== -->
+  <!-- ===== STEP 3: Cursorをダウンロード ===== -->
   <div class="step-card" id="step3">
     <span class="step-badge human">あなたがやること</span>
-    <h2>③ アプリを起動してClaude Codeを開く</h2>
+    <h2>③ Cursor（エディタ）をダウンロード</h2>
 
-    <div style="background:#0f172a;border-radius:10px;padding:16px;margin-bottom:14px;">
-      <p style="margin-bottom:8px;"><strong style="color:#3b82f6;">1.</strong> インストールしたアプリを開く</p>
-      <p style="margin-bottom:8px;"><strong style="color:#3b82f6;">2.</strong>「始める」→ アカウントでログイン</p>
-      <p style="margin-bottom:0;"><strong style="color:#3b82f6;">3.</strong> 画面上部の<strong>「コード」ボタン</strong>をクリック</p>
+    <p>Claude Codeを快適に使うための<strong>作業場所</strong>です。<br>
+    ターミナル（黒い画面）が内蔵されていて、ここからClaudeに指示を出します。</p>
+
+    <a href="https://www.cursor.com/" target="_blank" class="link-btn">
+      <span class="link-icon">📝</span>
+      <span class="link-text">
+        <h3>Cursor をダウンロード</h3>
+        <p>cursor.com → 「Download」ボタンを押すだけ</p>
+      </span>
+    </a>
+
+    <div style="background:#0f172a;border-radius:10px;padding:16px;margin:14px 0;">
+      <p style="margin-bottom:8px;"><strong style="color:#3b82f6;">1.</strong> ダウンロードしたファイルを開いてインストール</p>
+      <p style="margin-bottom:8px;"><strong style="color:#3b82f6;">2.</strong> Cursorを起動</p>
+      <p style="margin-bottom:0;"><strong style="color:#3b82f6;">3.</strong> 上メニューの「Terminal」→「New Terminal」でターミナルを開く</p>
     </div>
 
-    <p>入力ボックスが出たら成功！<br>ここからは <strong>Claudeが全部やってくれます。</strong></p>
+    <p class="hint">ターミナル（黒い画面）が下に表示されたら成功。<br>ここにClaudeへの指示を入力していきます。</p>
+
+    <details class="accordion">
+      <summary>VS Code を使いたい人</summary>
+      <div class="acc-body">
+        VS Code でもOKです。<a href="https://code.visualstudio.com/" target="_blank" style="color:#3b82f6;">code.visualstudio.com</a> からダウンロード。<br>
+        同じように「Terminal」→「New Terminal」でターミナルを開けます。
+      </div>
+    </details>
 
     <div class="btns-row">
       <button class="btn-back" onclick="go('step2')">← 戻る</button>
-      <button class="btn btn-purple" onclick="go('step4')">Claude Code開いた → 次へ</button>
+      <button class="btn btn-green" onclick="go('step4')">Cursorを開いた → 次へ</button>
     </div>
   </div>
 
-  <!-- ===== STEP 4: Claudeに指示（環境構築） ===== -->
+  <!-- ===== STEP 4: ターミナルからClaude Code起動 ===== -->
   <div class="step-card" id="step4">
     <span class="step-badge claude">Claudeにやってもらう</span>
-    <h2>④ この指示をClaudeに貼り付ける</h2>
-    <p>下の紫ボックスをクリック → コピーされる → <br>Claude Codeに貼り付けてEnter。あとは待つだけ。</p>
+    <h2>④ Cursorのターミナルで指示を出す</h2>
+    <p>下の紫ボックスをクリック → コピーされる → <br>Cursorのターミナルに貼り付けてEnter。</p>
 
     <div class="prompt-box" onclick="copyPrompt(this)">
-      <p class="prompt-label">Claudeへの指示 ①（環境構築）</p>
+      <p class="prompt-label">まずClaude Codeを起動</p>
+      <pre>claude</pre>
+    </div>
+
+    <p class="hint">初回はブラウザが開いて「承認する」ボタンが出ます。クリックしてください。<br>入力待ちの画面になったら準備OK。次の指示をコピペします。</p>
+
+    <hr class="divider">
+
+    <div class="prompt-box" onclick="copyPrompt(this)">
+      <p class="prompt-label">Claudeへの指示（環境構築を全部やらせる）</p>
       <pre>以下の環境構築を全部やってください:
 
 1. Node.js がインストールされているか確認して、なければインストールして
@@ -496,7 +529,7 @@
     <details class="accordion">
       <summary>うまくいかない場合</summary>
       <div class="acc-body">
-        エラーが出たら、そのエラーメッセージをそのままClaude Codeに貼り付けてください。<br>
+        エラーが出たら、そのエラーメッセージをそのままターミナルに貼り付けてください。<br>
         「このエラー直して」だけでOK。Claudeが自分で解決します。
       </div>
     </details>
@@ -577,6 +610,7 @@
 
 <script>
   const steps = ['step0','step1','step2','step3','step4','step5','stepDone'];
+  const totalSteps = steps.length - 1; // 6
   let currentIdx = 0;
 
   function go(id) {
