@@ -258,7 +258,8 @@
 
     <div class="btns-row">
       <button class="btn-back" onclick="go('step2')">← 戻る</button>
-      <button class="btn btn-green" onclick="go('step4')">できた → 次へ</button>
+      <button class="btn" style="background:#8b5cf6;" onclick="selectEditor('cursor')">Cursor を入れた → 次へ</button>
+      <button class="btn" style="background:#3b82f6;" onclick="selectEditor('vscode')">VS Code を入れた → 次へ</button>
     </div>
   </div>
 
@@ -267,9 +268,15 @@
     <span class="step-badge human">あなたがやること</span>
     <h2>④ Claude Code を起動する</h2>
 
-    <div style="background:#0f172a;border-radius:10px;padding:16px;margin-bottom:14px;">
-      <p style="margin-bottom:8px;"><strong style="color:#3b82f6;">1.</strong> Cursorを開く</p>
-      <p style="margin-bottom:8px;"><strong style="color:#3b82f6;">2.</strong> 上メニュー「Terminal」→「New Terminal」</p>
+    <div id="instructions-cursor" style="background:#0f172a;border-radius:10px;padding:16px;margin-bottom:14px;">
+      <p style="margin-bottom:8px;"><strong style="color:#8b5cf6;">1.</strong> <strong>Cursor</strong> を開く</p>
+      <p style="margin-bottom:8px;"><strong style="color:#8b5cf6;">2.</strong> 上メニュー「Terminal」→「New Terminal」</p>
+      <p style="margin-bottom:0;"><strong style="color:#8b5cf6;">3.</strong> ターミナルに <code style="background:#334155;padding:2px 6px;border-radius:4px;">claude</code> と入力してEnter</p>
+    </div>
+
+    <div id="instructions-vscode" style="background:#0f172a;border-radius:10px;padding:16px;margin-bottom:14px;display:none;">
+      <p style="margin-bottom:8px;"><strong style="color:#3b82f6;">1.</strong> <strong>VS Code</strong> を開く</p>
+      <p style="margin-bottom:8px;"><strong style="color:#3b82f6;">2.</strong> 上メニュー「Terminal」→「New Terminal」（またはCtrl + `）</p>
       <p style="margin-bottom:0;"><strong style="color:#3b82f6;">3.</strong> ターミナルに <code style="background:#334155;padding:2px 6px;border-radius:4px;">claude</code> と入力してEnter</p>
     </div>
 
@@ -294,11 +301,16 @@
     <h2>⑤ 作業フォルダーと初期設定を作る</h2>
     <p>紫ボックスをクリック → コピーされる → ターミナルに貼ってEnter。</p>
 
+    <div style="background:#1e293b;border:1px solid #f59e0b;border-radius:10px;padding:14px;margin-bottom:14px;">
+      <p style="font-size:13px;color:#fbbf24;margin-bottom:6px;">⚡ <strong>作業フォルダーはCドライブに作ろう</strong></p>
+      <p style="font-size:12px;color:#cbd5e1;margin-bottom:0;">OneDriveやクラウド同期フォルダ上で作業すると、ファイルの読み書きが遅くなります。<br><code style="background:#334155;padding:1px 5px;border-radius:3px;font-size:11px;">C:\Users\あなたの名前\Desktop</code> など<strong>Cドライブ直下</strong>に作業フォルダーを置くのがおすすめです。</p>
+    </div>
+
     <div class="prompt-box" onclick="copyPrompt(this)">
       <p class="prompt-label">Claudeへの指示</p>
       <pre>以下をやってください:
 1. Node.js がなければインストールして
-2. デスクトップに「AI作業フォルダー」を作って
+2. Cドライブのデスクトップに「AI作業フォルダー」を作って（OneDriveの中は避けて）
 3. そのフォルダーに移動して /init を実行して
 日本語で答えてね。</pre>
     </div>
@@ -592,6 +604,14 @@ claude plugin add https://github.com/Shin-sibainu/cc-secretary
 <script>
   const steps = ['step0','step1','step2','step3','step4','step5','step6','step7','step8','step9','step10','step11','stepDone'];
   let currentIdx = 0;
+  let editor = 'cursor';
+
+  function selectEditor(choice) {
+    editor = choice;
+    document.getElementById('instructions-cursor').style.display = choice === 'cursor' ? 'block' : 'none';
+    document.getElementById('instructions-vscode').style.display = choice === 'vscode' ? 'block' : 'none';
+    go('step4');
+  }
 
   function go(id) {
     document.querySelectorAll('.step-card').forEach(el => el.classList.remove('active'));
