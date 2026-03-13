@@ -91,6 +91,11 @@
     .roadmap-item.upcoming { color: #475569; }
     .roadmap-item .rm-icon { width: 22px; text-align: center; margin-right: 8px; flex-shrink: 0; }
     .roadmap-item .rm-text { flex: 1; }
+    .copy-cmd { display:flex; align-items:center; background:#1e293b; border:1px solid #475569; border-radius:6px; padding:8px 12px; margin:4px 0 10px; cursor:pointer; transition:border-color .2s,background .2s; }
+    .copy-cmd:hover { border-color:#3b82f6; background:#263548; }
+    .copy-cmd code { flex:1; color:#22c55e; font-size:13px; }
+    .copy-cmd .copy-btn { background:#334155; color:#94a3b8; border:none; border-radius:4px; padding:4px 10px; font-size:11px; cursor:pointer; white-space:nowrap; }
+    .copy-cmd.copied .copy-btn { background:#22c55e; color:#fff; }
   </style>
 </head>
 <body>
@@ -272,28 +277,24 @@
       <p style="margin-bottom:12px;"><strong style="color:#8b5cf6;">1.</strong> <strong>Cursor</strong> を開く</p>
       <p style="margin-bottom:12px;"><strong style="color:#8b5cf6;">2.</strong> 上メニュー「Terminal」→「New Terminal」</p>
       <p style="margin-bottom:6px;"><strong style="color:#8b5cf6;">3.</strong> ターミナルに以下を<strong>1行ずつ</strong>コピペしてEnter:</p>
-      <div style="background:#334155;border-radius:8px;padding:12px;margin-bottom:12px;">
-        <p style="font-size:11px;color:#94a3b8;margin-bottom:4px;">▼ まずNode.jsをインストール（既に入ってたらスキップ）</p>
-        <code style="color:#22c55e;font-size:13px;">winget install OpenJS.NodeJS</code>
-        <p style="font-size:11px;color:#94a3b8;margin:10px 0 4px;">▼ 次にClaude Codeをインストール</p>
-        <code style="color:#22c55e;font-size:13px;">npm install -g @anthropic-ai/claude-code</code>
-        <p style="font-size:11px;color:#94a3b8;margin:10px 0 4px;">▼ 起動</p>
-        <code style="color:#22c55e;font-size:13px;">claude</code>
-      </div>
+      <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ まずNode.jsをインストール（既に入ってたらスキップ）</p>
+      <div class="copy-cmd" onclick="copyCmd(this)"><code>winget install OpenJS.NodeJS</code><button class="copy-btn">コピー</button></div>
+      <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ 次にClaude Codeをインストール</p>
+      <div class="copy-cmd" onclick="copyCmd(this)"><code>npm install -g @anthropic-ai/claude-code</code><button class="copy-btn">コピー</button></div>
+      <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ 起動</p>
+      <div class="copy-cmd" onclick="copyCmd(this)"><code>claude</code><button class="copy-btn">コピー</button></div>
     </div>
 
     <div id="instructions-vscode" style="background:#0f172a;border-radius:10px;padding:16px;margin-bottom:14px;display:none;">
       <p style="margin-bottom:12px;"><strong style="color:#3b82f6;">1.</strong> <strong>VS Code</strong> を開く</p>
       <p style="margin-bottom:12px;"><strong style="color:#3b82f6;">2.</strong> 上メニュー「Terminal」→「New Terminal」（またはCtrl + `）</p>
       <p style="margin-bottom:6px;"><strong style="color:#3b82f6;">3.</strong> ターミナルに以下を<strong>1行ずつ</strong>コピペしてEnter:</p>
-      <div style="background:#334155;border-radius:8px;padding:12px;margin-bottom:12px;">
-        <p style="font-size:11px;color:#94a3b8;margin-bottom:4px;">▼ まずNode.jsをインストール（既に入ってたらスキップ）</p>
-        <code style="color:#22c55e;font-size:13px;">winget install OpenJS.NodeJS</code>
-        <p style="font-size:11px;color:#94a3b8;margin:10px 0 4px;">▼ 次にClaude Codeをインストール</p>
-        <code style="color:#22c55e;font-size:13px;">npm install -g @anthropic-ai/claude-code</code>
-        <p style="font-size:11px;color:#94a3b8;margin:10px 0 4px;">▼ 起動</p>
-        <code style="color:#22c55e;font-size:13px;">claude</code>
-      </div>
+      <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ まずNode.jsをインストール（既に入ってたらスキップ）</p>
+      <div class="copy-cmd" onclick="copyCmd(this)"><code>winget install OpenJS.NodeJS</code><button class="copy-btn">コピー</button></div>
+      <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ 次にClaude Codeをインストール</p>
+      <div class="copy-cmd" onclick="copyCmd(this)"><code>npm install -g @anthropic-ai/claude-code</code><button class="copy-btn">コピー</button></div>
+      <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ 起動</p>
+      <div class="copy-cmd" onclick="copyCmd(this)"><code>claude</code><button class="copy-btn">コピー</button></div>
     </div>
 
     <p class="hint">初回は<code style="background:#334155;padding:1px 5px;border-radius:3px;">claude</code>を打つとブラウザが開いて「承認する」ボタンが出ます → クリック。<br>入力待ちの画面が出たら成功。ここからはClaudeにコピペで指示を出していきます。</p>
@@ -653,6 +654,17 @@ claude plugin add https://github.com/Shin-sibainu/cc-secretary
     navigator.clipboard.writeText(pre.textContent).then(() => {
       el.classList.add('copied');
       setTimeout(() => el.classList.remove('copied'), 2000);
+    });
+  }
+
+  function copyCmd(el) {
+    const code = el.querySelector('code');
+    if (!code) return;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      const btn = el.querySelector('.copy-btn');
+      el.classList.add('copied');
+      btn.textContent = 'OK!';
+      setTimeout(() => { el.classList.remove('copied'); btn.textContent = 'コピー'; }, 1500);
     });
   }
 </script>
