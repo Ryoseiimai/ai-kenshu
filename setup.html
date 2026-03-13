@@ -587,26 +587,41 @@
       <h3 style="font-size:15px;margin-bottom:12px;text-align:left;">おすすめプラグイン（無料）</h3>
       <p style="font-size:12px;color:#94a3b8;margin-bottom:12px;text-align:left;">コミュニティ製の人気プラグイン。AI組織をさらに強化できます。</p>
 
-      <div class="prompt-box" onclick="copyPrompt(this)">
-        <p class="prompt-label">🏢 cc-company — AI仮想会社プラグイン</p>
-        <p style="font-size:11px;color:#94a3b8;margin:-4px 0 8px;">秘書がヒアリング→CEO が部署に自動振り分け。11部門（PM・マーケ・開発・営業…）が動く仮想会社</p>
-        <pre>以下のコマンドを順番に実行してください:
+      <!-- cc-company -->
+      <div style="background:#0f172a;border:2px solid #8b5cf6;border-radius:12px;padding:16px;margin-bottom:14px;text-align:left;">
+        <h3 style="color:#a78bfa;margin-bottom:6px;font-size:15px;">🏢 cc-company — AI仮想会社プラグイン</h3>
+        <p style="font-size:12px;color:#cbd5e1;margin-bottom:12px;">秘書に話しかけるだけで、CEOが判断して各部署（PM・マーケ・開発・営業など11部門）に自動でタスクを振り分けてくれる仮想会社を構築できます。</p>
 
-claude plugin add https://github.com/Shin-sibainu/cc-company
+        <p style="font-size:12px;color:#f8fafc;margin-bottom:4px;"><strong>組織の仕組み:</strong></p>
+        <div style="background:#1e293b;border-radius:8px;padding:10px;margin-bottom:12px;">
+          <p style="font-size:12px;color:#94a3b8;margin:0;">あなた → 🗂 秘書（窓口・何でも相談） → 👔 CEO（判断・振り分け） → 各部署</p>
+        </div>
 
-インストールできたら /company を実行して、初期セットアップを開始してください。
-秘書が業務内容をヒアリングして、最適な部署構成を自動で作ってくれます。</pre>
+        <p style="font-size:12px;color:#f8fafc;margin-bottom:6px;"><strong>インストール手順（2ステップ）:</strong></p>
+        <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ ステップ1: プラグインを追加</p>
+        <div class="copy-cmd" onclick="copyCmd(this)"><code>/plugin marketplace add Shin-sibainu/cc-company</code><button class="copy-btn">コピー</button></div>
+        <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ ステップ2: インストール</p>
+        <div class="copy-cmd" onclick="copyCmd(this)"><code>/plugin install company@cc-company</code><button class="copy-btn">コピー</button></div>
+        <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ ステップ3: 起動（秘書がヒアリングを開始）</p>
+        <div class="copy-cmd" onclick="copyCmd(this)"><code>/company</code><button class="copy-btn">コピー</button></div>
+
+        <p style="font-size:11px;color:#94a3b8;margin-top:8px;margin-bottom:0;">秘書があなたの事業・目標・困っていることを聞いてくれて、最適な部署構成を自動で作ります。<br>以降は <code style="background:#334155;padding:1px 4px;border-radius:3px;">/company</code> で秘書に話しかけるだけ。</p>
       </div>
 
-      <div class="prompt-box" onclick="copyPrompt(this)">
-        <p class="prompt-label">📋 cc-secretary — AI秘書プラグイン</p>
-        <p style="font-size:11px;color:#94a3b8;margin:-4px 0 8px;">タスク管理・メモ・アイデア記録・週次レビューを自動でやってくれるパーソナル秘書</p>
-        <pre>以下のコマンドを順番に実行してください:
+      <!-- cc-secretary -->
+      <div style="background:#0f172a;border:2px solid #3b82f6;border-radius:12px;padding:16px;margin-bottom:14px;text-align:left;">
+        <h3 style="color:#60a5fa;margin-bottom:6px;font-size:15px;">📋 cc-secretary — AI秘書プラグイン</h3>
+        <p style="font-size:12px;color:#cbd5e1;margin-bottom:12px;">タスク管理・メモ・アイデア記録・週次レビューを自動でやってくれるパーソナル秘書。あなたの役割に合わせたフォルダ構成も自動で作ります。</p>
 
-claude plugin add https://github.com/Shin-sibainu/cc-secretary
+        <p style="font-size:12px;color:#f8fafc;margin-bottom:6px;"><strong>インストール手順（2ステップ）:</strong></p>
+        <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ ステップ1: プラグインを追加</p>
+        <div class="copy-cmd" onclick="copyCmd(this)"><code>/plugin marketplace add Shin-sibainu/cc-secretary</code><button class="copy-btn">コピー</button></div>
+        <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ ステップ2: インストール</p>
+        <div class="copy-cmd" onclick="copyCmd(this)"><code>/plugin install secretary@cc-secretary</code><button class="copy-btn">コピー</button></div>
+        <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ ステップ3: 起動（セットアップ開始）</p>
+        <div class="copy-cmd" onclick="copyCmd(this)"><code>/secretary</code><button class="copy-btn">コピー</button></div>
 
-インストールできたら /secretary を実行して、初期セットアップを開始してください。
-あなたの役割や業務に合わせて、最適なフォルダ構成とタスク管理を自動で作ってくれます。</pre>
+        <p style="font-size:11px;color:#94a3b8;margin-top:8px;margin-bottom:0;">あなたの職種・業務に合わせて最適なフォルダ構成とタスク管理を自動で構築します。</p>
       </div>
 
       <hr class="divider">
