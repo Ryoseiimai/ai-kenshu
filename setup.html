@@ -276,10 +276,8 @@
     <div id="instructions-cursor" style="background:#0f172a;border-radius:10px;padding:16px;margin-bottom:14px;">
       <p style="margin-bottom:12px;"><strong style="color:#8b5cf6;">1.</strong> <strong>Cursor</strong> を開く</p>
       <p style="margin-bottom:12px;"><strong style="color:#8b5cf6;">2.</strong> 上メニュー「Terminal」→「New Terminal」</p>
-      <p style="margin-bottom:6px;"><strong style="color:#8b5cf6;">3.</strong> ターミナルに以下を<strong>1行ずつ</strong>コピペしてEnter:</p>
-      <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ まずNode.jsをインストール（既に入ってたらスキップ）</p>
-      <div class="copy-cmd" onclick="copyCmd(this)"><code>winget install OpenJS.NodeJS</code><button class="copy-btn">コピー</button></div>
-      <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ 次にClaude Codeをインストール</p>
+      <p style="margin-bottom:6px;"><strong style="color:#8b5cf6;">3.</strong> ターミナルに以下を<strong>順番に</strong>コピペしてEnter:</p>
+      <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ Claude Codeをインストール</p>
       <div class="copy-cmd" onclick="copyCmd(this)"><code>npm install -g @anthropic-ai/claude-code</code><button class="copy-btn">コピー</button></div>
       <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ 起動</p>
       <div class="copy-cmd" onclick="copyCmd(this)"><code>claude</code><button class="copy-btn">コピー</button></div>
@@ -288,10 +286,8 @@
     <div id="instructions-vscode" style="background:#0f172a;border-radius:10px;padding:16px;margin-bottom:14px;display:none;">
       <p style="margin-bottom:12px;"><strong style="color:#3b82f6;">1.</strong> <strong>VS Code</strong> を開く</p>
       <p style="margin-bottom:12px;"><strong style="color:#3b82f6;">2.</strong> 上メニュー「Terminal」→「New Terminal」（またはCtrl + `）</p>
-      <p style="margin-bottom:6px;"><strong style="color:#3b82f6;">3.</strong> ターミナルに以下を<strong>1行ずつ</strong>コピペしてEnter:</p>
-      <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ まずNode.jsをインストール（既に入ってたらスキップ）</p>
-      <div class="copy-cmd" onclick="copyCmd(this)"><code>winget install OpenJS.NodeJS</code><button class="copy-btn">コピー</button></div>
-      <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ 次にClaude Codeをインストール</p>
+      <p style="margin-bottom:6px;"><strong style="color:#3b82f6;">3.</strong> ターミナルに以下を<strong>順番に</strong>コピペしてEnter:</p>
+      <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ Claude Codeをインストール</p>
       <div class="copy-cmd" onclick="copyCmd(this)"><code>npm install -g @anthropic-ai/claude-code</code><button class="copy-btn">コピー</button></div>
       <p style="font-size:11px;color:#94a3b8;margin-bottom:2px;">▼ 起動</p>
       <div class="copy-cmd" onclick="copyCmd(this)"><code>claude</code><button class="copy-btn">コピー</button></div>
@@ -300,16 +296,11 @@
     <p class="hint">初回は<code style="background:#334155;padding:1px 5px;border-radius:3px;">claude</code>を打つとブラウザが開いて「承認する」ボタンが出ます → クリック。<br>入力待ちの画面が出たら成功。ここからはClaudeにコピペで指示を出していきます。</p>
 
     <details class="accordion">
-      <summary>「winget」が使えないと出た場合</summary>
-      <div class="acc-body">
-        <a href="https://nodejs.org/" target="_blank" style="color:#3b82f6;">nodejs.org</a> から直接ダウンロードしてインストールしてください。インストール後、ターミナルを閉じて開き直してから <code>npm install -g @anthropic-ai/claude-code</code> を実行。
-      </div>
-    </details>
-
-    <details class="accordion">
       <summary>「npm」が見つからないと出た場合</summary>
       <div class="acc-body">
-        Node.jsのインストール後にターミナルを<strong>一度閉じて開き直す</strong>必要があります。VS Code/Cursorを再起動してからもう一度やってみてください。
+        Node.jsが入っていません。先にインストールしてください:<br>
+        <div class="copy-cmd" onclick="copyCmd(this)" style="margin-top:8px;"><code>winget install OpenJS.NodeJS</code><button class="copy-btn">コピー</button></div>
+        <p style="font-size:12px;margin-top:6px;">wingetが使えない場合は <a href="https://nodejs.org/" target="_blank" style="color:#3b82f6;">nodejs.org</a> から直接ダウンロード。<br>インストール後、ターミナルを<strong>閉じて開き直して</strong>からもう一度やってください。</p>
       </div>
     </details>
 
