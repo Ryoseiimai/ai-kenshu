@@ -467,12 +467,31 @@
 1. まずMCPとは何かを30秒で説明して
 2. Gmail と連携する手順を教えて（実際に設定まで）
 3. Googleカレンダーと連携する手順を教えて
-4. 設定が終わったら「カレンダーの今週の予定を教えて」を実行してテストして
+4. Outlookを使っている場合はOutlookメール・カレンダーとの連携も教えて
+5. 設定が終わったら「カレンダーの今週の予定を教えて」を実行してテストして
 
 日本語でステップバイステップでお願いします。</pre>
     </div>
 
     <p class="hint">設定後は「メール確認して」「明日の14時に打ち合わせ入れて」が日本語だけで通じるようになります。</p>
+
+    <div style="background:#0f172a;border:2px solid #22c55e;border-radius:10px;padding:16px;margin:12px 0;">
+      <p style="font-size:13px;color:#22c55e;font-weight:700;margin-bottom:10px;">💡 おすすめの使い方: 「今日やること整理して」</p>
+      <p style="font-size:12px;color:#cbd5e1;margin-bottom:10px;">MCP設定が終わったら、毎朝これをClaudeに貼るだけで1日の予定が整理されます:</p>
+      <div class="prompt-box" onclick="copyPrompt(this)">
+        <p class="prompt-label">毎朝の整理プロンプト（コピーして使ってね）</p>
+        <pre>今日やることを整理してください:
+
+1. メール（Gmail or Outlook）を確認して、返信が必要なものをリストアップ
+2. カレンダー（Googleカレンダー or Outlook）を確認して、今日の予定を時間順に並べて
+3. 上の2つを合わせて「今日やること」リストを優先度付きで作って
+
+フォーマット:
+🔴 最優先（すぐやる）
+🟡 今日中にやる
+🟢 余裕があればやる</pre>
+      </div>
+    </div>
 
     <div class="btns-row">
       <button class="btn-back" onclick="go('step7')">← 戻る</button>
