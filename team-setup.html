@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>チームでClaude Codeを共有する方法</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0f172a; color: #e2e8f0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; }
+    .app { max-width: 680px; margin: 0 auto; padding: 20px 16px 60px; }
+    .header { text-align: center; padding: 24px 0 20px; }
+    .header h1 { font-size: 20px; margin-bottom: 6px; }
+    .header p { font-size: 13px; color: #94a3b8; }
+    .back-link { display: inline-block; margin-bottom: 16px; color: #3b82f6; font-size: 13px; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+
+    .section { background: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+    .section h2 { font-size: 16px; margin-bottom: 12px; color: #f8fafc; }
+    .section h3 { font-size: 14px; margin: 16px 0 8px; color: #60a5fa; }
+    .section p { font-size: 13px; color: #cbd5e1; margin-bottom: 8px; }
+    .section ul { padding-left: 20px; margin-bottom: 10px; }
+    .section li { font-size: 13px; color: #cbd5e1; margin-bottom: 4px; }
+
+    .flow-box { background: #0f172a; border-radius: 10px; padding: 16px; margin: 12px 0; }
+    .flow-step { display: flex; align-items: flex-start; margin-bottom: 14px; }
+    .flow-step:last-child { margin-bottom: 0; }
+    .flow-num { background: #3b82f6; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; margin-right: 12px; margin-top: 2px; }
+    .flow-content { flex: 1; }
+    .flow-content p { margin-bottom: 4px; }
+    .flow-content .sub { font-size: 11px; color: #94a3b8; }
+
+    .copy-cmd { display: flex; align-items: center; background: #334155; border: 1px solid #475569; border-radius: 6px; padding: 8px 12px; margin: 6px 0; cursor: pointer; transition: border-color .2s; }
+    .copy-cmd:hover { border-color: #3b82f6; }
+    .copy-cmd code { flex: 1; color: #22c55e; font-size: 13px; }
+    .copy-cmd .copy-btn { background: #475569; color: #94a3b8; border: none; border-radius: 4px; padding: 4px 10px; font-size: 11px; cursor: pointer; }
+    .copy-cmd.copied .copy-btn { background: #22c55e; color: #fff; }
+
+    .diagram { background: #0f172a; border-radius: 10px; padding: 16px; margin: 12px 0; text-align: center; }
+    .diagram p { font-size: 13px; color: #94a3b8; margin-bottom: 2px; }
+    .diagram .arrow { color: #3b82f6; font-size: 18px; }
+
+    .scope-card { background: #0f172a; border: 2px solid #334155; border-radius: 10px; padding: 14px; margin-bottom: 10px; }
+    .scope-card.recommended { border-color: #22c55e; }
+    .scope-card h4 { font-size: 13px; margin-bottom: 4px; }
+    .scope-card p { font-size: 12px; color: #94a3b8; margin-bottom: 0; }
+    .badge { display: inline-block; background: #22c55e; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
+
+    .qa { margin-top: 12px; }
+    .qa-item { margin-bottom: 10px; }
+    .qa-item .q { font-size: 13px; color: #f8fafc; font-weight: 700; margin-bottom: 4px; }
+    .qa-item .a { font-size: 12px; color: #94a3b8; }
+  </style>
+</head>
+<body>
+<div class="app">
+  <a href="setup.html" class="back-link">← セットアップウィザードに戻る</a>
+
+  <div class="header">
+    <h1>チームでClaude Codeの設定を共有する方法</h1>
+    <p>プラグイン・スキル・設定をチーム全員で同じにするためのガイド</p>
+  </div>
+
+  <!-- ===== そもそもの話 ===== -->
+  <div class="section">
+    <h2>そもそも「スコープ」って何？</h2>
+    <p>プラグインをインストールするときに「<strong>この設定をどこまで適用する？</strong>」と聞かれます。</p>
+    <p>例えるなら、アプリの設定を「自分のスマホだけ」にするか「家族全員のスマホ」にするかを選ぶ感じです。</p>
+
+    <div class="scope-card recommended">
+      <h4 style="color:#22c55e;">🙋 Install for you (User Scope) <span class="badge">おすすめ</span></h4>
+      <p><strong>自分のPC全体に適用。</strong>どのプロジェクトを開いても使える。個人で使うならこれ一択。</p>
+    </div>
+
+    <div class="scope-card">
+      <h4 style="color:#60a5fa;">👥 Install for all collaborators (Project Scope)</h4>
+      <p><strong>チームで共有。</strong>設定ファイルがプロジェクト内に作られる。チーム全員で同じ設定を使いたいときに選ぶ。</p>
+    </div>
+
+    <div class="scope-card">
+      <h4 style="color:#94a3b8;">📁 Install for you, in this repo only (Local Scope)</h4>
+      <p><strong>このプロジェクトだけ＆自分だけ。</strong>他の人には影響しない。試しに入れたいときに便利。</p>
+    </div>
+  </div>
+
+  <!-- ===== チーム共有の全体像 ===== -->
+  <div class="section">
+    <h2>チームで共有するとどうなる？</h2>
+    <p>Project Scopeを選ぶと、プラグインの設定ファイルがプロジェクトフォルダの中に保存されます。<br>それをGitHub（ファイルの共有場所）にアップロードすれば、チーム全員が同じ設定を使えるようになります。</p>
+
+    <div class="diagram">
+      <p><strong style="color:#f8fafc;">あなたのPC</strong></p>
+      <p>プラグインをインストール（Project Scope）</p>
+      <p class="arrow">↓ git push（アップロード）</p>
+      <p><strong style="color:#f8fafc;">GitHub（共有場所）</strong></p>
+      <p class="arrow">↓ git pull（ダウンロード）</p>
+      <p><strong style="color:#f8fafc;">チームメンバーのPC</strong></p>
+      <p>自動で同じプラグインが使える！</p>
+    </div>
+  </div>
+
+  <!-- ===== 手順 ===== -->
+  <div class="section">
+    <h2>やり方（ステップごと）</h2>
+
+    <h3>あなた（設定する人）がやること</h3>
+
+    <div class="flow-box">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-content">
+          <p><strong>プラグインをインストールする</strong></p>
+          <p class="sub">スコープを聞かれたら「Install for all collaborators (Project Scope)」を選ぶ</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-content">
+          <p><strong>設定ファイルが自動で作られたか確認する</strong></p>
+          <p class="sub">ターミナルで以下を実行：</p>
+          <div class="copy-cmd" onclick="copyCmd(this)"><code>git status</code><button class="copy-btn">コピー</button></div>
+          <p class="sub">新しいファイル（.claude/ フォルダなど）が表示されればOK</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-content">
+          <p><strong>GitHubにアップロードする</strong></p>
+          <p class="sub">以下のコマンドを順番に実行：</p>
+          <div class="copy-cmd" onclick="copyCmd(this)"><code>git add .</code><button class="copy-btn">コピー</button></div>
+          <p class="sub">↑ 変更したファイルを全部選択</p>
+          <div class="copy-cmd" onclick="copyCmd(this)"><code>git commit -m "プラグイン設定を追加"</code><button class="copy-btn">コピー</button></div>
+          <p class="sub">↑ 「こういう変更をしました」というメモを付けて保存</p>
+          <div class="copy-cmd" onclick="copyCmd(this)"><code>git push</code><button class="copy-btn">コピー</button></div>
+          <p class="sub">↑ GitHubにアップロード。これでチームに共有される</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>チームメンバーがやること</h3>
+
+    <div class="flow-box">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-content">
+          <p><strong>最新の設定をダウンロードする</strong></p>
+          <p class="sub">ターミナルで以下を実行：</p>
+          <div class="copy-cmd" onclick="copyCmd(this)"><code>git pull</code><button class="copy-btn">コピー</button></div>
+          <p class="sub">↑ GitHubから最新のファイルをダウンロード。プラグインの設定ファイルも一緒に来る</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-content">
+          <p><strong>Claude Codeを起動する</strong></p>
+          <p class="sub">そのプロジェクトフォルダで <code style="background:#475569;padding:1px 5px;border-radius:3px;">claude</code> を実行するだけ。<br>設定ファイルを自動で読み込んで、同じプラグインが使える状態になります。</p>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:12px;color:#22c55e;"><strong>つまり、チームメンバーは「git pull → claude」の2コマンドだけ。</strong></p>
+  </div>
+
+  <!-- ===== よくある質問 ===== -->
+  <div class="section">
+    <h2>よくある質問</h2>
+
+    <div class="qa">
+      <div class="qa-item">
+        <p class="q">Q. チームメンバーもプラグインのインストールが必要？</p>
+        <p class="a">A. いいえ。Project Scopeで共有された設定は git pull するだけで自動で反映されます。メンバーがインストールコマンドを打つ必要はありません。</p>
+      </div>
+      <div class="qa-item">
+        <p class="q">Q. User ScopeとProject Scope、両方入れたらどうなる？</p>
+        <p class="a">A. 両方有効になります。User Scopeは自分だけの設定、Project Scopeはチーム共有の設定として共存できます。</p>
+      </div>
+      <div class="qa-item">
+        <p class="q">Q. GitHubを使ったことがないんだけど…</p>
+        <p class="a">A. まずは User Scope（自分だけ）で使ってください。チーム共有はGitHubの基本操作（push/pull）ができるようになってからで大丈夫です。</p>
+      </div>
+      <div class="qa-item">
+        <p class="q">Q. 後からスコープを変えられる？</p>
+        <p class="a">A. はい。プラグインをアンインストールして、別のスコープで入れ直せば変更できます。</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:24px;">
+    <a href="setup.html" style="color:#3b82f6;font-size:14px;">← セットアップウィザードに戻る</a>
+  </div>
+</div>
+
+<script>
+  function copyCmd(el) {
+    const code = el.querySelector('code');
+    if (!code) return;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      const btn = el.querySelector('.copy-btn');
+      el.classList.add('copied');
+      btn.textContent = 'OK!';
+      setTimeout(() => { el.classList.remove('copied'); btn.textContent = 'コピー'; }, 1500);
+    });
+  }
+</script>
+</body>
+</html>
