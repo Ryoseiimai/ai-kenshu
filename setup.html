@@ -590,8 +590,45 @@
       </div>
 
       <div class="prompt-box" onclick="copyPrompt(this)">
-        <p class="prompt-label">もっと使いこなす：外部ツール連携</p>
+        <p class="prompt-label">もっと使いこなす：外部ツール連携（MCP）</p>
         <pre>Googleカレンダー、Gmail、NotionとClaude Codeを連携する方法を教えて。MCPの設定手順を日本語で。</pre>
+      </div>
+
+      <div class="prompt-box" onclick="copyPrompt(this)">
+        <p class="prompt-label">上級：AI組織を作る（サブエージェント）</p>
+        <pre>Claude Codeで「AI会社組織」を構築してください。
+
+1. CLAUDE.mdに以下の組織構成を書いて:
+   - 社長（あなた=Claude Code）：全体統括・判断
+   - 秘書：タスク管理・スケジュール
+   - リサーチ部：情報収集・要約
+   - マーケ部：SNS・コンテンツ作成
+   - 開発部：コード・自動化
+
+2. 各部署の役割と報告ルールを定義して
+
+3. サブエージェント（Agent tool）で部下に仕事を振る仕組みを作って
+   - 独立したタスクは並列で処理
+   - 結果は必ずファイルに保存
+
+4. テストとして「今日のAIニュースを3つ調べてまとめて」をサブエージェントに委任して実行して
+
+日本語で。完了したら組織図を見せて。</pre>
+      </div>
+
+      <div class="prompt-box" onclick="copyPrompt(this)">
+        <p class="prompt-label">上級：スキル（カスタムコマンド）を作る</p>
+        <pre>Claude Codeのスキル（カスタムスラッシュコマンド）を作ってください。
+
+1. .claude/commands/ フォルダーを作って
+2. 「朝レポート」スキルを作って:
+   - /朝レポート と打つと実行される
+   - 最新ニュース取得 → タスク整理 → 今日の優先度づけ を自動実行
+3. 「議事録」スキルを作って:
+   - /議事録 と打つと実行される
+   - 会議メモを渡すと → 要約・決定事項・次のアクションに整理
+
+作ったら使い方を教えて。</pre>
       </div>
 
       <div style="margin-top:20px;">
