@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yoom 調査レポート | Team RYU</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #f8f9fa; color: #333; line-height: 1.9; }
+
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #fff;
+    padding: 60px 40px;
+    text-align: center;
+  }
+  .header h1 { font-size: 2rem; font-weight: 900; margin-bottom: 8px; }
+  .header .sub { color: #8888bb; font-size: 0.95rem; }
+  .header .meta { margin-top: 20px; font-size: 0.8rem; color: #666699; }
+  .header .meta span { margin: 0 12px; padding: 4px 14px; border: 1px solid #333366; border-radius: 100px; }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 40px 24px 100px; }
+
+  h2 {
+    font-size: 1.4rem; font-weight: 900; color: #1a1a2e;
+    margin-top: 48px; margin-bottom: 16px;
+    padding-bottom: 8px; border-bottom: 3px solid #6366f1;
+  }
+  h3 { font-size: 1.1rem; font-weight: 700; color: #333; margin-top: 28px; margin-bottom: 12px; }
+
+  p { margin-bottom: 12px; font-size: 0.95rem; }
+
+  .card {
+    background: #fff; border-radius: 12px; padding: 24px;
+    margin: 16px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-left: 4px solid #6366f1;
+  }
+  .card.green { border-left-color: #22c55e; }
+  .card.orange { border-left-color: #f59e0b; }
+  .card.red { border-left-color: #ef4444; }
+  .card-title { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  th { background: #1a1a2e; color: #fff; font-weight: 500; font-size: 0.85rem; padding: 12px 16px; text-align: left; }
+  td { padding: 12px 16px; font-size: 0.85rem; border-bottom: 1px solid #eee; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: #f8f8ff; }
+
+  .tag {
+    display: inline-block; padding: 2px 10px; border-radius: 100px;
+    font-size: 0.75rem; font-weight: 700;
+  }
+  .tag.yes { background: #dcfce7; color: #166534; }
+  .tag.partial { background: #fef9c3; color: #854d0e; }
+  .tag.no { background: #fee2e2; color: #991b1b; }
+
+  .flow-step {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 0; border-bottom: 1px solid #eee;
+  }
+  .flow-step:last-child { border-bottom: none; }
+  .flow-num {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 0.9rem; flex-shrink: 0;
+    background: #eef2ff; color: #6366f1;
+  }
+  .flow-num.green-bg { background: #dcfce7; color: #166534; }
+  .flow-num.yellow-bg { background: #fef9c3; color: #854d0e; }
+  .flow-num.red-bg { background: #fee2e2; color: #991b1b; }
+  .flow-title { font-weight: 700; font-size: 0.95rem; }
+  .flow-desc { font-size: 0.85rem; color: #666; margin-top: 4px; }
+  .flow-yoom { font-size: 0.8rem; color: #6366f1; margin-top: 4px; font-weight: 500; }
+
+  .conclusion {
+    background: linear-gradient(135deg, #eef2ff, #faf5ff);
+    border: 2px solid #6366f1;
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 40px;
+  }
+  .conclusion h2 { border-bottom-color: #6366f1; }
+
+  ul { margin: 8px 0 8px 20px; font-size: 0.9rem; }
+  li { margin-bottom: 6px; }
+
+  .highlight { background: #fef9c3; padding: 2px 6px; border-radius: 4px; }
+
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0; }
+  .table-wrap table { margin: 0; min-width: 520px; }
+
+  @media (max-width: 640px) {
+    .header { padding: 36px 20px; }
+    .header h1 { font-size: 1.4rem; }
+    .header .meta { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .header .meta span { margin: 0; font-size: 0.7rem; }
+    .container { padding: 24px 16px 60px; }
+    h2 { font-size: 1.15rem; margin-top: 36px; }
+    h3 { font-size: 1rem; }
+    p, li { font-size: 0.88rem; }
+    .card { padding: 18px 16px; }
+    th, td { padding: 10px 10px; font-size: 0.78rem; }
+    .flow-step { gap: 12px; padding: 12px 0; }
+    .flow-num { width: 30px; height: 30px; font-size: 0.8rem; }
+    .flow-title { font-size: 0.88rem; }
+    .flow-desc, .flow-yoom { font-size: 0.8rem; }
+    .conclusion { padding: 20px 16px; }
+    .conclusion p { font-size: 0.92rem !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Yoom 業務自動化 調査レポート</h1>
+  <div class="sub">給与振込フローの自動化可能性を検証</div>
+  <div class="meta">
+    <span>2026.03.15</span>
+    <span>作成: RYOSEI</span>
+    <span>宛先: 隆一さん</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Yoomとは -->
+  <h2>1. Yoomとは</h2>
+  <div class="card">
+    <div class="card-title">ノーコード業務自動化プラットフォーム</div>
+    <p>プログラミング不要で、複数のツール（Gmail、Google Sheets、LINE、銀行システム等）を繋いで業務を自動化できるサービス。Make（旧Integromat）やZapierの日本版。</p>
+    <ul>
+      <li><strong>700以上のアプリ連携</strong>（Gmail、Slack、Notion、Google Sheets、LINE等）</li>
+      <li><strong>AI機能搭載</strong>（OCR、データ変換、AIワーカー）</li>
+      <li><strong>日本語UI</strong>・日本企業のサポート</li>
+      <li><strong>導入実績</strong>：DMM、朝日新聞、JTB、ココナラなど</li>
+    </ul>
+  </div>
+
+  <!-- 料金プラン -->
+  <h2>2. 料金プラン</h2>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>プラン</th><th>月額（年契約）</th><th>タスク/月</th><th>フロー数</th><th>ユーザー</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>フリー</strong></td><td>無料</td><td>100回</td><td>5個（5ステップ）</td><td>3名</td></tr>
+      <tr><td><strong>ミニ</strong></td><td>9,600円</td><td>3,000回</td><td>10個（15ステップ）</td><td>3名</td></tr>
+      <tr><td><strong>チーム</strong></td><td>24,000円</td><td>10,000回</td><td>無制限（100ステップ）</td><td>10名</td></tr>
+      <tr><td><strong>サクセス</strong></td><td>48,000円</td><td>30,000回</td><td>無制限（300ステップ）</td><td>20名</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="card green">
+    <div class="card-title">推奨</div>
+    <p>検証フェーズは<strong>フリープラン（無料）</strong>で十分。フロー5個・月100タスクで給与振込フローの検証が可能。本格導入時は<strong>チームプラン（月24,000円）</strong>が最適。</p>
+  </div>
+
+  <!-- 給与振込フロー × Yoom -->
+  <h2>3. 給与振込フローの自動化可能性</h2>
+  <p>現状の給与振込フロー（9ステップ）について、Yoomでの自動化可能性を判定しました。</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>ステップ</th><th>現状</th><th>Yoom自動化</th><th>判定</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>STEP1</strong><br>タイムカード集計</td>
+        <td>各店舗から手作業で集計</td>
+        <td>Google Sheets連携で自動集約。店舗ごとのシートを1つに統合</td>
+        <td><span class="tag yes">自動化可</span></td>
+      </tr>
+      <tr>
+        <td><strong>STEP2</strong><br>給与計算</td>
+        <td>パターン別に手計算（約10パターン）</td>
+        <td>計算ロジックをGoogle Sheetsに組み、Yoomでトリガー実行。ただしパターンの整理が先</td>
+        <td><span class="tag partial">一部可</span></td>
+      </tr>
+      <tr>
+        <td><strong>STEP3</strong><br>大橋さん承認</td>
+        <td>メールorLINEで確認依頼</td>
+        <td>Yoomの承認フロー機能で自動化。計算完了→自動で承認依頼→ボタン1つで承認</td>
+        <td><span class="tag yes">自動化可</span></td>
+      </tr>
+      <tr>
+        <td><strong>STEP4</strong><br>愛知銀行振込予約</td>
+        <td>口座マスタ参照→手入力→支払日4日前に予約</td>
+        <td>ネットバンキングのAPI/CSV連携が可能なら自動化できる。要銀行仕様確認</td>
+        <td><span class="tag partial">要確認</span></td>
+      </tr>
+      <tr>
+        <td><strong>STEP5</strong><br>UFJ口座情報収集</td>
+        <td>LINEで毎回収集。催促も手動。<strong>最大ボトルネック</strong></td>
+        <td>Googleフォームで口座情報を入力→Yoomで自動集約→未提出者に自動リマインド</td>
+        <td><span class="tag yes">自動化可</span></td>
+      </tr>
+      <tr>
+        <td><strong>STEP6</strong><br>UFJ BizSTATION振込予約</td>
+        <td>口座情報を1件ずつ手入力。南村さんダブルチェック</td>
+        <td>集約データからCSV自動生成→BizSTATIONにアップロード。チェックシートも自動生成</td>
+        <td><span class="tag partial">一部可</span></td>
+      </tr>
+      <tr>
+        <td><strong>STEP7</strong><br>振込実行・報告</td>
+        <td>振込実行→LINEグループに完了報告</td>
+        <td>振込完了をトリガーに、LINE/メール/Google Chatへ自動通知</td>
+        <td><span class="tag yes">自動化可</span></td>
+      </tr>
+      <tr>
+        <td><strong>STEP8</strong><br>税務処理</td>
+        <td>源泉徴収計算→税理士連携→Dropbox保存</td>
+        <td>計算は自動化可。Dropboxへの自動保存もYoomで可能。税理士への自動送付も可</td>
+        <td><span class="tag yes">自動化可</span></td>
+      </tr>
+      <tr>
+        <td><strong>STEP9</strong><br>現金手渡し</td>
+        <td>銀行窓口で引き出し→手渡し</td>
+        <td>物理作業のため自動化不可。記録・管理のみ自動化</td>
+        <td><span class="tag no">不可</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- 自動化の根拠 -->
+  <h2>4. 自動化できる根拠</h2>
+
+  <div class="card green">
+    <div class="card-title">STEP5（UFJ口座収集）が最も効果が大きい</div>
+    <p>現状：LINEで毎月口座情報を手動収集（月1.5時間+催促の手間）</p>
+    <p><strong>Yoomでの実現方法：</strong></p>
+    <ul>
+      <li>Googleフォームで口座情報入力ページを作成</li>
+      <li>Yoomが月初に自動でフォームリンクをLINE/メール送信</li>
+      <li>未回答者に自動リマインド（2日後・4日後）</li>
+      <li>回答データをGoogle Sheetsに自動集約</li>
+    </ul>
+    <p><strong>根拠：</strong> YoomはGoogleフォーム・Google Sheets・LINE連携を標準サポート。同様の自動リマインドフローはYoomのテンプレートとして公開されており、ノーコードで構築可能。</p>
+  </div>
+
+  <div class="card green">
+    <div class="card-title">STEP3（承認フロー）の自動化</div>
+    <p>現状：経理→大橋さんへメールorLINEで確認依頼（やり取りに時間がかかる）</p>
+    <p><strong>Yoomでの実現方法：</strong></p>
+    <ul>
+      <li>給与計算完了→Yoomが自動で大橋さんに承認依頼メール送信</li>
+      <li>メール内のボタン1クリックで承認完了</li>
+      <li>承認→次の振込ステップが自動で開始</li>
+    </ul>
+    <p><strong>根拠：</strong> Yoomの「承認フロー」は標準機能として搭載済み。フリープランでも利用可能。</p>
+  </div>
+
+  <div class="card green">
+    <div class="card-title">STEP1（タイムカード集計）の自動化</div>
+    <p>現状：各店舗から手作業でデータ集計</p>
+    <p><strong>Yoomでの実現方法：</strong></p>
+    <ul>
+      <li>各店舗がGoogle Sheetsに入力（テンプレート統一）</li>
+      <li>Yoomが全店舗分を自動で1つのシートに統合</li>
+      <li>全店舗分揃ったら自動通知</li>
+    </ul>
+    <p><strong>根拠：</strong> Google Sheets連携はYoomの主要機能。複数シートの統合・トリガー設定は標準テンプレートあり。</p>
+  </div>
+
+  <div class="card orange">
+    <div class="card-title">STEP4/6（銀行振込）は要確認</div>
+    <p>愛知銀行・UFJ BizSTATIONのネットバンキングとの直接連携は、銀行側のAPI対応状況による。</p>
+    <p>ただし、<strong>振込データCSVの自動生成</strong>まではYoomで確実にできる。最後の「アップロード操作」だけ人間がやる形でも、手入力ミスが激減する。</p>
+  </div>
+
+  <!-- 導入ステップ -->
+  <h2>5. 推奨する導入ステップ</h2>
+
+  <div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+    <div class="flow-step">
+      <div class="flow-num green-bg">1</div>
+      <div>
+        <div class="flow-title">フリープランで検証（0円・1-2週間）</div>
+        <div class="flow-desc">STEP5（口座情報収集の自動化）を1つだけ作って、実際に回してみる</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div>
+        <div class="flow-title">効果検証（2週間）</div>
+        <div class="flow-desc">月1.5時間+催促の手間がどれだけ減ったか測定</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div>
+        <div class="flow-title">チームプランに移行（月24,000円）</div>
+        <div class="flow-desc">承認フロー・タイムカード集計・完了通知を追加構築</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div>
+        <div class="flow-title">全フロー自動化</div>
+        <div class="flow-desc">給与計算→承認→振込データ生成→通知まで一気通貫</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 結論 -->
+  <div class="conclusion">
+    <h2>結論</h2>
+    <p style="font-size:1.05rem;font-weight:500;">給与振込フローの<strong>9ステップ中、5ステップはYoomで自動化可能</strong>。2ステップは部分的に自動化可能。現金手渡し以外はほぼ全て対応できる。</p>
+    <p style="margin-top:12px;">特に<span class="highlight">STEP5（UFJ口座収集）</span>は最大のボトルネックであり、Yoomで最も効果が出るポイント。<strong>フリープラン（0円）で今すぐ検証開始できる。</strong></p>
+    <p style="margin-top:12px;font-size:0.9rem;color:#666;">本格導入時のコスト：チームプラン月24,000円。現状の経理人件費（月数十時間の手作業）と比較して十分にROIが合う想定。</p>
+  </div>
+
+</div>
+</body>
+</html>
