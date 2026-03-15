@@ -87,7 +87,7 @@
 
   .highlight { background: #fef9c3; padding: 2px 6px; border-radius: 4px; }
 
-  .compare-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+  .compare-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 20px 0; }
   .compare-card {
     background: #fff; border-radius: 12px; padding: 24px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 4px solid #ddd; text-align: center;
@@ -341,7 +341,22 @@
   <h2>6. 他ツールとの比較（3案）</h2>
   <p>同カテゴリの主要3ツールを比較。10名規模・月10,000タスクでの想定。</p>
 
-  <div class="compare-grid">
+  <div class="compare-grid" style="grid-template-columns:repeat(4,1fr);">
+    <div class="compare-card red-border" style="border-top-color:#ef4444;">
+      <div class="tool-name">現状維持</div>
+      <div class="tool-origin">人間が手作業</div>
+      <div class="tool-price">¥25,000</div>
+      <div class="tool-price-sub">人件費 / 月（12.5時間分）</div>
+      <ul>
+        <li>ツール費用は0円だが<strong>毎月12.5時間</strong>の作業が発生</li>
+        <li>手入力ミスのリスク（振込先間違い等）</li>
+        <li>催促・やり取りの精神的負担</li>
+        <li>担当者が休むと業務が止まる</li>
+        <li>業務量が増えるとスケールしない</li>
+        <li>年間コスト: <strong>¥300,000</strong>（人件費のみ）</li>
+      </ul>
+    </div>
+
     <div class="compare-card">
       <div class="tool-name">Make</div>
       <div class="tool-origin">海外製（旧Integromat）</div>
@@ -392,17 +407,17 @@
   <div class="table-wrap">
   <table>
     <thead>
-      <tr><th>比較項目</th><th>Yoom</th><th>Make</th><th>Zapier</th></tr>
+      <tr><th>比較項目</th><th>現状（人間）</th><th>Yoom</th><th>Make</th><th>Zapier</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>月額（10名）</strong></td><td>¥19,200〜24,000</td><td>~¥6,000</td><td>~¥15,000</td></tr>
-      <tr><td><strong>日本語UI</strong></td><td>完全対応</td><td>英語中心</td><td>英語中心</td></tr>
-      <tr><td><strong>日本語サポート</strong></td><td>あり（メール・チャット）</td><td>なし</td><td>なし</td></tr>
-      <tr><td><strong>承認フロー</strong></td><td>標準搭載</td><td>なし（自作）</td><td>なし（自作）</td></tr>
-      <tr><td><strong>連携アプリ数</strong></td><td>300+（日本SaaS◎）</td><td>1,500+</td><td>7,000+</td></tr>
-      <tr><td><strong>freee/MF連携</strong></td><td>あり</td><td>API経由</td><td>あり</td></tr>
-      <tr><td><strong>非IT人材での構築</strong></td><td>◎ 簡単</td><td>△ 学習コスト高</td><td>○ 普通</td></tr>
-      <tr><td><strong>無料プラン</strong></td><td>100タスク/3名</td><td>1,000クレジット/2シナリオ</td><td>100タスク/1名</td></tr>
+      <tr><td><strong>月額（10名）</strong></td><td>¥25,000（人件費）</td><td>¥19,200〜24,000</td><td>~¥6,000</td><td>~¥15,000</td></tr>
+      <tr><td><strong>日本語UI</strong></td><td>—</td><td>完全対応</td><td>英語中心</td><td>英語中心</td></tr>
+      <tr><td><strong>日本語サポート</strong></td><td>—</td><td>あり（メール・チャット）</td><td>なし</td><td>なし</td></tr>
+      <tr><td><strong>承認フロー</strong></td><td>メール/LINE手動</td><td>標準搭載</td><td>なし（自作）</td><td>なし（自作）</td></tr>
+      <tr><td><strong>ミスのリスク</strong></td><td>高（手入力）</td><td>低（自動）</td><td>低（自動）</td><td>低（自動）</td></tr>
+      <tr><td><strong>属人化リスク</strong></td><td>高（担当者依存）</td><td>低（フロー化）</td><td>低（フロー化）</td><td>低（フロー化）</td></tr>
+      <tr><td><strong>連携アプリ数</strong></td><td>—</td><td>300+（日本SaaS◎）</td><td>1,500+</td><td>7,000+</td></tr>
+      <tr><td><strong>非IT人材での構築</strong></td><td>—</td><td>◎ 簡単</td><td>△ 学習コスト高</td><td>○ 普通</td></tr>
     </tbody>
   </table>
   </div>
