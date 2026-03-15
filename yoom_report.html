@@ -261,16 +261,15 @@
   <h2>4. 自動化できる根拠</h2>
 
   <div class="card green">
-    <div class="card-title">STEP5（UFJ口座収集）が最も効果が大きい</div>
-    <p>現状：LINEで毎月口座情報を手動収集（月1.5時間+催促の手間）</p>
+    <div class="card-title">STEP1（タイムカード集計）の自動化</div>
+    <p>現状：各店舗から手作業でデータ集計</p>
     <p><strong>Yoomでの実現方法：</strong></p>
     <ul>
-      <li>Googleフォームで口座情報入力ページを作成</li>
-      <li>Yoomが月初に自動でフォームリンクをLINE/メール送信</li>
-      <li>未回答者に自動リマインド（2日後・4日後）</li>
-      <li>回答データをGoogle Sheetsに自動集約</li>
+      <li>各店舗がGoogle Sheetsに入力（テンプレート統一）</li>
+      <li>Yoomが全店舗分を自動で1つのシートに統合</li>
+      <li>全店舗分揃ったら自動通知</li>
     </ul>
-    <p><strong>根拠：</strong> YoomはGoogleフォーム・Google Sheets・LINE連携を標準サポート。同様の自動リマインドフローはYoomのテンプレートとして公開されており、ノーコードで構築可能。</p>
+    <p><strong>根拠：</strong> Google Sheets連携はYoomの主要機能。複数シートの統合・トリガー設定は標準テンプレートあり。</p>
   </div>
 
   <div class="card green">
@@ -286,15 +285,16 @@
   </div>
 
   <div class="card green">
-    <div class="card-title">STEP1（タイムカード集計）の自動化</div>
-    <p>現状：各店舗から手作業でデータ集計</p>
+    <div class="card-title">STEP5（UFJ口座収集）が最も効果が大きい</div>
+    <p>現状：LINEで毎月口座情報を手動収集（月1.5時間+催促の手間）</p>
     <p><strong>Yoomでの実現方法：</strong></p>
     <ul>
-      <li>各店舗がGoogle Sheetsに入力（テンプレート統一）</li>
-      <li>Yoomが全店舗分を自動で1つのシートに統合</li>
-      <li>全店舗分揃ったら自動通知</li>
+      <li>Googleフォームで口座情報入力ページを作成</li>
+      <li>Yoomが月初に自動でフォームリンクをLINE/メール送信</li>
+      <li>未回答者に自動リマインド（2日後・4日後）</li>
+      <li>回答データをGoogle Sheetsに自動集約</li>
     </ul>
-    <p><strong>根拠：</strong> Google Sheets連携はYoomの主要機能。複数シートの統合・トリガー設定は標準テンプレートあり。</p>
+    <p><strong>根拠：</strong> YoomはGoogleフォーム・Google Sheets・LINE連携を標準サポート。同様の自動リマインドフローはYoomのテンプレートとして公開されており、ノーコードで構築可能。</p>
   </div>
 
   <div class="card orange">
