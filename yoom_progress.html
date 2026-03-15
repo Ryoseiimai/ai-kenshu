@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yoom フローボット構築 進捗レポート | Team RYU</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #f8f9fa; color: #333; line-height: 1.9; }
+
+  .header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+    color: #fff; padding: 48px 40px; text-align: center;
+  }
+  .header h1 { font-size: 1.8rem; font-weight: 900; margin-bottom: 8px; }
+  .header .sub { color: #93c5fd; font-size: 0.95rem; }
+  .header .meta { margin-top: 16px; font-size: 0.8rem; color: #64748b; }
+  .header .meta span { margin: 0 8px; padding: 4px 14px; border: 1px solid #334155; border-radius: 100px; }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  h2 {
+    font-size: 1.3rem; font-weight: 900; color: #0f172a;
+    margin-top: 40px; margin-bottom: 14px;
+    padding-bottom: 8px; border-bottom: 3px solid #3b82f6;
+  }
+  p { margin-bottom: 12px; font-size: 0.93rem; }
+  ul { margin: 8px 0 12px 20px; font-size: 0.9rem; }
+  li { margin-bottom: 6px; }
+
+  .card {
+    background: #fff; border-radius: 12px; padding: 20px 24px;
+    margin: 14px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-left: 4px solid #3b82f6;
+  }
+  .card.done { border-left-color: #22c55e; }
+  .card.wip { border-left-color: #f59e0b; }
+  .card.next { border-left-color: #94a3b8; }
+  .card-title { font-weight: 700; font-size: 1rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+
+  .status {
+    display: inline-block; padding: 2px 10px; border-radius: 100px;
+    font-size: 0.72rem; font-weight: 700;
+  }
+  .status.done { background: #dcfce7; color: #166534; }
+  .status.wip { background: #fef9c3; color: #854d0e; }
+  .status.next { background: #f1f5f9; color: #64748b; }
+
+  .flow-visual {
+    background: #fff; border-radius: 12px; padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin: 20px 0;
+  }
+  .flow-node {
+    display: flex; align-items: center; gap: 14px; padding: 12px 0;
+  }
+  .flow-node + .flow-node { border-top: 1px dashed #e2e8f0; }
+  .flow-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 0.85rem; flex-shrink: 0; color: #fff;
+  }
+  .flow-icon.trigger { background: #3b82f6; }
+  .flow-icon.action { background: #22c55e; }
+  .flow-icon.pending { background: #cbd5e1; }
+  .flow-label { font-weight: 700; font-size: 0.9rem; }
+  .flow-desc { font-size: 0.8rem; color: #64748b; margin-top: 2px; }
+
+  .sheet-link {
+    display: block; background: #f8fafc; border: 1px solid #e2e8f0;
+    border-radius: 8px; padding: 12px 16px; margin: 8px 0;
+    text-decoration: none; color: #1e40af; font-size: 0.85rem;
+    transition: background 0.2s;
+  }
+  .sheet-link:hover { background: #eff6ff; }
+  .sheet-link .sheet-name { font-weight: 700; }
+  .sheet-link .sheet-desc { color: #64748b; font-size: 0.8rem; }
+
+  .summary-box {
+    background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+    border: 2px solid #3b82f6; border-radius: 16px;
+    padding: 28px; margin-top: 32px;
+  }
+
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  th { background: #0f172a; color: #fff; font-weight: 500; font-size: 0.82rem; padding: 10px 14px; text-align: left; }
+  td { padding: 10px 14px; font-size: 0.82rem; border-bottom: 1px solid #eee; }
+  tr:last-child td { border-bottom: none; }
+
+  @media (max-width: 640px) {
+    .header { padding: 32px 20px; }
+    .header h1 { font-size: 1.3rem; }
+    .header .meta { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .header .meta span { margin: 0; font-size: 0.7rem; }
+    .container { padding: 20px 16px 60px; }
+    h2 { font-size: 1.1rem; }
+    .card { padding: 16px; }
+    .flow-node { gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Yoom フローボット構築 進捗レポート</h1>
+  <div class="sub">給与振込業務の自動化 — 構築状況</div>
+  <div class="meta">
+    <span>2026.03.15</span>
+    <span>作成: RYOSEI（AI構築）</span>
+    <span>宛先: 隆一さん</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <h2>1. やったこと（全体像）</h2>
+  <p>給与振込フロー（9ステップ）の自動化に向けて、以下を実施しました。</p>
+
+  <div class="card done">
+    <div class="card-title"><span class="status done">完了</span> Yoom調査・ツール比較</div>
+    <p>Yoom / Make / Zapier の3ツールを比較調査。日本語対応・承認フロー標準搭載の観点から<strong>Yoomを推奨</strong>と結論。</p>
+  </div>
+
+  <div class="card done">
+    <div class="card-title"><span class="status done">完了</span> Google Sheets（4つ）を作成</div>
+    <p>フローボットが参照・書き込みするデータ基盤を構築済み。</p>
+  </div>
+
+  <div class="card done">
+    <div class="card-title"><span class="status done">完了</span> フローボット設計（5本分）</div>
+    <p>口座収集・タイムカード催促・振込通知・承認リマインド・CSV生成の5フローを設計済み。</p>
+  </div>
+
+  <div class="card wip">
+    <div class="card-title"><span class="status wip">構築中</span> フロー1: 口座情報収集の自動化</div>
+    <p>Yoom上でフローボットの構築を開始。トリガー設定済み、アクション設定中。</p>
+  </div>
+
+  <!-- Google Sheets -->
+  <h2>2. 作成したGoogle Sheets</h2>
+  <p>全て <strong>ryosei@team-ryu.com</strong> で作成済み。フローボットからこれらを参照・更新します。</p>
+
+  <a class="sheet-link" href="https://docs.google.com/spreadsheets/d/1GeAvGVD3PPHepvHTOqxUBbSFdtlLNPB6_PG2XIEZYpo/edit" target="_blank">
+    <div class="sheet-name">1. 口座マスタ</div>
+    <div class="sheet-desc">スタッフ口座の一元管理。シート: 口座マスタ / 変更履歴</div>
+  </a>
+  <a class="sheet-link" href="https://docs.google.com/spreadsheets/d/1ejRoBuL64eIFMtLxB09SSL2cYKEL9axtPZ2pnDoX2wA/edit" target="_blank">
+    <div class="sheet-name">2. 口座入力フォーム</div>
+    <div class="sheet-desc">スタッフが自分で口座情報を入力するシート。シート: 入力欄 / 入力済み一覧</div>
+  </a>
+  <a class="sheet-link" href="https://docs.google.com/spreadsheets/d/16y-soF1X7M_K9juvzfuCwFZq5A54s2mY86tXfLbWrPU/edit" target="_blank">
+    <div class="sheet-name">3. 給与振込管理</div>
+    <div class="sheet-desc">月次の進捗トラッキング。シート: 振込進捗 / 月次サマリー</div>
+  </a>
+  <a class="sheet-link" href="https://docs.google.com/spreadsheets/d/1RF2HXrEupM120Kr34X0JMHtWZq3pcRDdykFfbHi96wo/edit" target="_blank">
+    <div class="sheet-name">4. 通知テンプレート集</div>
+    <div class="sheet-desc">Yoomから送るメール・チャット文面（11パターン）</div>
+  </a>
+
+  <!-- フロー構築状況 -->
+  <h2>3. フローボット構築状況</h2>
+
+  <h3 style="font-size:1rem;font-weight:700;margin-top:24px;margin-bottom:12px;">フロー1: 口座情報収集の自動化 <span class="status wip">構築中</span></h3>
+
+  <div class="flow-visual">
+    <div class="flow-node">
+      <div class="flow-icon trigger">T</div>
+      <div>
+        <div class="flow-label">スケジュールトリガー（毎月25日 9:00）</div>
+        <div class="flow-desc">支払日の5日前に自動起動 <span class="status done">設定済み</span></div>
+      </div>
+    </div>
+    <div class="flow-node">
+      <div class="flow-icon action">1</div>
+      <div>
+        <div class="flow-label">口座マスタから値を取得</div>
+        <div class="flow-desc">Google スプレッドシート連携 → 未登録者を抽出 <span class="status wip">設定中</span></div>
+      </div>
+    </div>
+    <div class="flow-node">
+      <div class="flow-icon pending">2</div>
+      <div>
+        <div class="flow-label">未登録者にメール送信</div>
+        <div class="flow-desc">入力フォームのリンクをGmail/Google Chatで自動送信 <span class="status next">未着手</span></div>
+      </div>
+    </div>
+    <div class="flow-node">
+      <div class="flow-icon pending">3</div>
+      <div>
+        <div class="flow-label">フォーム回答 → 口座マスタに自動追記</div>
+        <div class="flow-desc">回答データを口座マスタに自動反映 <span class="status next">未着手</span></div>
+      </div>
+    </div>
+    <div class="flow-node">
+      <div class="flow-icon pending">4</div>
+      <div>
+        <div class="flow-label">全員揃ったら経理に通知</div>
+        <div class="flow-desc">全スタッフの口座情報が揃った時点で完了通知 <span class="status next">未着手</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5フロー全体 -->
+  <h3 style="font-size:1rem;font-weight:700;margin-top:28px;margin-bottom:12px;">全5フローの進捗</h3>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>フロー</th><th>内容</th><th>トリガー</th><th>状態</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>フロー1</strong></td>
+        <td>口座情報収集の自動化</td>
+        <td>毎月25日</td>
+        <td><span class="status wip">構築中</span></td>
+      </tr>
+      <tr>
+        <td><strong>フロー2</strong></td>
+        <td>タイムカード催促</td>
+        <td>毎月1日</td>
+        <td><span class="status next">設計済み</span></td>
+      </tr>
+      <tr>
+        <td><strong>フロー3</strong></td>
+        <td>振込完了通知</td>
+        <td>シート更新時</td>
+        <td><span class="status next">設計済み</span></td>
+      </tr>
+      <tr>
+        <td><strong>フロー4</strong></td>
+        <td>承認リマインダー</td>
+        <td>毎日チェック</td>
+        <td><span class="status next">設計済み</span></td>
+      </tr>
+      <tr>
+        <td><strong>フロー5</strong></td>
+        <td>振込データCSV自動生成</td>
+        <td>承認完了時</td>
+        <td><span class="status next">設計済み</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- 制約 -->
+  <h2>4. 把握している制約</h2>
+  <div class="card">
+    <ul style="margin:0;">
+      <li>銀行（愛知銀行・UFJ BizSTATION）との直接連携は不可 → <strong>CSVの自動生成まで</strong>がYoomの対応範囲。最後のアップロードだけ人間が行う</li>
+      <li>LINE個人グループへの通知は不可 → <strong>Google Chat or メール</strong>で代替</li>
+      <li>Google Sheets / Gmail / Google Chat / Dropbox は連携OK</li>
+    </ul>
+  </div>
+
+  <!-- まとめ -->
+  <div class="summary-box">
+    <h2 style="border-bottom-color:#3b82f6;">現在地と次のステップ</h2>
+    <p style="font-size:1rem;font-weight:500;">調査・設計・データ基盤の構築は完了。現在フロー1（口座情報収集）をYoom上で実装中。</p>
+    <p style="margin-top:10px;">次のステップ:</p>
+    <ul>
+      <li><strong>フロー1の完成</strong>（Google Sheets連携 → メール送信 → 口座マスタ更新）</li>
+      <li><strong>テスト実行</strong>（手動起動で1回回して動作確認）</li>
+      <li><strong>フロー2〜5の構築</strong>（フロー1の完成後に順次）</li>
+    </ul>
+    <p style="margin-top:14px;font-size:0.8rem;color:#64748b;">※ 本レポートはAIが作成した資料です。フリープラン（0円）で構築中のため、追加コストは現時点で発生していません。</p>
+  </div>
+
+</div>
+</body>
+</html>
