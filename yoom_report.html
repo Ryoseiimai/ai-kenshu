@@ -342,18 +342,17 @@
   <p>同カテゴリの主要3ツールを比較。10名規模・月10,000タスクでの想定。</p>
 
   <div class="compare-grid" style="grid-template-columns:repeat(4,1fr);">
-    <div class="compare-card red-border" style="border-top-color:#ef4444;">
+    <div class="compare-card" style="border-top-color:#ef4444;">
       <div class="tool-name">現状維持</div>
-      <div class="tool-origin">人間が手作業</div>
-      <div class="tool-price">¥25,000</div>
-      <div class="tool-price-sub">人件費 / 月（12.5時間分）</div>
+      <div class="tool-origin">3名が手作業</div>
+      <div class="tool-price" style="color:#ef4444;">高コスト</div>
+      <div class="tool-price-sub">人件費 × 3名分 / 月</div>
       <ul>
-        <li>ツール費用は0円だが<strong>毎月12.5時間</strong>の作業が発生</li>
-        <li>手入力ミスのリスク（振込先間違い等）</li>
-        <li>催促・やり取りの精神的負担</li>
-        <li>担当者が休むと業務が止まる</li>
-        <li>業務量が増えるとスケールしない</li>
-        <li>年間コスト: <strong>¥300,000</strong>（人件費のみ）</li>
+        <li>ツール費は0円だが<strong>人的コストが大きい</strong></li>
+        <li>手入力ミスのリスク</li>
+        <li>催促の精神的負担</li>
+        <li>担当者が休むと止まる</li>
+        <li>会社拡大に対応できない</li>
       </ul>
     </div>
 
@@ -410,7 +409,7 @@
       <tr><th>比較項目</th><th>現状（人間）</th><th>Yoom</th><th>Make</th><th>Zapier</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>月額（10名）</strong></td><td>¥25,000（人件費）</td><td>¥19,200〜24,000</td><td>~¥6,000</td><td>~¥15,000</td></tr>
+      <tr><td><strong>月額コスト</strong></td><td>人件費 × 3名</td><td>¥19,200〜24,000</td><td>~¥6,000</td><td>~¥15,000</td></tr>
       <tr><td><strong>日本語UI</strong></td><td>—</td><td>完全対応</td><td>英語中心</td><td>英語中心</td></tr>
       <tr><td><strong>日本語サポート</strong></td><td>—</td><td>あり（メール・チャット）</td><td>なし</td><td>なし</td></tr>
       <tr><td><strong>承認フロー</strong></td><td>メール/LINE手動</td><td>標準搭載</td><td>なし（自作）</td><td>なし（自作）</td></tr>
@@ -428,122 +427,54 @@
     <p>また、経理担当者が日本語のみの場合、英語UIのMake・Zapierは運用が困難。<strong>サポートコスト込みで考えるとYoomが最もトータルコストが低い。</strong></p>
   </div>
 
-  <!-- コスト比較 -->
-  <h2>7. コスト比較：現状 vs 自動化</h2>
+  <!-- 現状の課題 -->
+  <h2>7. 現状の課題と自動化のメリット</h2>
 
-  <div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin:16px 0;">
-    <h3 style="margin-top:0;">現状の給与業務コスト</h3>
-    <p style="font-size:0.85rem;color:#666;">経理担当者の時給 約2,000円（月給30万÷160h）で算出</p>
+  <div class="card red" style="border-left-color:#ef4444;">
+    <div class="card-title">現状：3名体制で手作業に多くの時間を費やしている</div>
+    <ul>
+      <li>給与振込業務を<strong>3名の担当者</strong>が毎月手作業で処理</li>
+      <li>口座情報の収集・催促、手入力、ダブルチェックなど<strong>工数が大きい</strong></li>
+      <li>手入力によるミスのリスク（振込先間違い等）</li>
+      <li>催促・確認のやり取りに時間と精神的負担がかかる</li>
+      <li>担当者が休むと業務が止まる（属人化）</li>
+      <li>会社の拡大に伴い、今後さらに負担が増える</li>
+    </ul>
+  </div>
 
-    <div class="cost-bar-wrap">
-      <div class="cost-bar-label"><span>STEP1 タイムカード集計</span><span>3.0h / ¥6,000</span></div>
-      <div class="cost-bar" style="background:#eee;"><div class="fill" style="width:24%;background:#6366f1;">3h</div></div>
-    </div>
-    <div class="cost-bar-wrap">
-      <div class="cost-bar-label"><span>STEP2 給与計算</span><span>2.0h / ¥4,000</span></div>
-      <div class="cost-bar" style="background:#eee;"><div class="fill" style="width:16%;background:#6366f1;">2h</div></div>
-    </div>
-    <div class="cost-bar-wrap">
-      <div class="cost-bar-label"><span>STEP3 承認やり取り</span><span>0.5h / ¥1,000</span></div>
-      <div class="cost-bar" style="background:#eee;"><div class="fill" style="width:4%;background:#6366f1;"></div></div>
-    </div>
-    <div class="cost-bar-wrap">
-      <div class="cost-bar-label"><span>STEP4 愛知銀行振込</span><span>1.0h / ¥2,000</span></div>
-      <div class="cost-bar" style="background:#eee;"><div class="fill" style="width:8%;background:#6366f1;">1h</div></div>
-    </div>
-    <div class="cost-bar-wrap">
-      <div class="cost-bar-label"><span>STEP5 UFJ口座収集+催促</span><span>1.5h / ¥3,000</span></div>
-      <div class="cost-bar" style="background:#eee;"><div class="fill" style="width:12%;background:#ef4444;">1.5h</div></div>
-    </div>
-    <div class="cost-bar-wrap">
-      <div class="cost-bar-label"><span>STEP6 BizSTATION入力</span><span>2.0h / ¥4,000</span></div>
-      <div class="cost-bar" style="background:#eee;"><div class="fill" style="width:16%;background:#6366f1;">2h</div></div>
-    </div>
-    <div class="cost-bar-wrap">
-      <div class="cost-bar-label"><span>STEP7 振込実行・報告</span><span>0.5h / ¥1,000</span></div>
-      <div class="cost-bar" style="background:#eee;"><div class="fill" style="width:4%;background:#6366f1;"></div></div>
-    </div>
-    <div class="cost-bar-wrap">
-      <div class="cost-bar-label"><span>STEP8 税務処理</span><span>1.5h / ¥3,000</span></div>
-      <div class="cost-bar" style="background:#eee;"><div class="fill" style="width:12%;background:#6366f1;">1.5h</div></div>
-    </div>
-    <div class="cost-bar-wrap">
-      <div class="cost-bar-label"><span>STEP9 現金手渡し</span><span>0.5h / ¥1,000</span></div>
-      <div class="cost-bar" style="background:#eee;"><div class="fill" style="width:4%;background:#999;"></div></div>
-    </div>
-
-    <div style="margin-top:16px;padding-top:16px;border-top:2px solid #eee;display:flex;justify-content:space-between;font-weight:700;">
-      <span>合計</span><span>12.5時間 / 月 ＝ ¥25,000 / 月（年間 ¥300,000）</span>
-    </div>
+  <div class="card green">
+    <div class="card-title">自動化すると何が変わるか</div>
+    <ul>
+      <li><strong>口座情報の収集・催促が全自動</strong>（STEP5: 最大のボトルネック解消）</li>
+      <li><strong>承認フローがワンクリック</strong>（STEP3: メール/LINEのやり取り不要）</li>
+      <li><strong>手入力ゼロ</strong> → ミスが激減、ダブルチェックの負担も軽減</li>
+      <li><strong>担当者に依存しない</strong> → フローが仕組みとして残る</li>
+      <li><strong>会社が拡大しても同じ工数</strong> → スケールする仕組み</li>
+      <li>3名の担当者が<strong>より価値の高い業務に集中</strong>できる</li>
+    </ul>
   </div>
 
   <div class="roi-box">
     <div style="display:flex;justify-content:center;gap:48px;flex-wrap:wrap;">
       <div>
-        <div class="roi-num">68%</div>
-        <div class="roi-label">作業時間の削減率</div>
+        <div class="roi-num">9ステップ中7</div>
+        <div class="roi-label">自動化 or 部分自動化が可能</div>
       </div>
       <div>
-        <div class="roi-num">8.5h → 4h</div>
-        <div class="roi-label">月の作業時間（12.5h → 4h）</div>
+        <div class="roi-num">0円</div>
+        <div class="roi-label">フリープランで今すぐ検証可能</div>
       </div>
       <div>
-        <div class="roi-num">¥204,000</div>
-        <div class="roi-label">年間削減額</div>
+        <div class="roi-num">¥24,000/月〜</div>
+        <div class="roi-label">本格導入時のコスト（チームプラン）</div>
       </div>
-    </div>
-  </div>
-
-  <div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin:16px 0;">
-    <h3 style="margin-top:0;">ツール別 年間コスト比較</h3>
-    <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th></th><th>現状（手作業）</th><th>Yoom導入</th><th>Make導入</th><th>Zapier導入</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>人件費 / 年</strong></td>
-          <td>¥300,000</td>
-          <td>¥96,000</td>
-          <td>¥96,000</td>
-          <td>¥96,000</td>
-        </tr>
-        <tr>
-          <td><strong>ツール費 / 年</strong></td>
-          <td>¥0</td>
-          <td>¥230,400</td>
-          <td>¥72,000</td>
-          <td>¥180,000</td>
-        </tr>
-        <tr>
-          <td><strong>学習・サポートコスト</strong></td>
-          <td>—</td>
-          <td>低（日本語）</td>
-          <td>高（英語UI）</td>
-          <td>中（英語UI）</td>
-        </tr>
-        <tr style="background:#f0fdf4;font-weight:700;">
-          <td><strong>合計 / 年</strong></td>
-          <td>¥300,000</td>
-          <td>¥326,400</td>
-          <td>¥168,000</td>
-          <td>¥276,000</td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
-    <div class="card orange" style="margin-top:16px;">
-      <div class="card-title">コストだけ見るとMakeが最安だが...</div>
-      <p>Makeは英語UIかつ承認フロー機能がないため、経理担当者が自力で構築・運用するのは難しい。<strong>構築支援や翻訳サポートの隠れコスト</strong>を考慮すると、Yoomの方がトータルで安くなるケースが多い。</p>
-      <p>また、給与業務だけでなく<strong>他の業務（経費申請・請求書処理・日報集約等）も自動化</strong>すれば、Yoomのコストは十分にペイする。</p>
     </div>
   </div>
 
   <!-- 結論 -->
   <div class="conclusion">
     <h2>結論</h2>
-    <p style="font-size:1.05rem;font-weight:500;">給与振込フローの<strong>9ステップ中、5ステップはYoomで自動化可能</strong>。2ステップは部分的に自動化可能。作業時間は月12.5時間→4時間に<strong>68%削減</strong>。</p>
+    <p style="font-size:1.05rem;font-weight:500;">給与振込フローの<strong>9ステップ中、5ステップはYoomで自動化可能</strong>。2ステップは部分的に自動化可能。現在3名で回している手作業の大部分を仕組み化できる。</p>
     <p style="margin-top:12px;">3ツール比較の結果、<strong>日本語サポート・承認フロー標準搭載・非IT人材でも構築可能</strong>な点からYoomを推奨。コスト最安はMakeだが、運用の現実性でYoomが優位。</p>
     <p style="margin-top:12px;">特に<span class="highlight">STEP5（UFJ口座収集）</span>は最大のボトルネックであり、Yoomで最も効果が出るポイント。<strong>フリープラン（0円）で今すぐ検証開始できる。</strong></p>
     <p style="margin-top:16px;font-size:0.85rem;color:#666;">給与業務以外（経費申請・請求書処理・日報集約等）も含めて自動化すれば、年間のROIはさらに改善する。</p>
