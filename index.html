@@ -11,7 +11,43 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ryoseiimai.github.io/ai-kenshu/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "RYOSEIWORLD AIエージェント導入サポート",
+        "description": "Claude Code導入サポート。プログラミング不要、日本語指示だけで業務を自動化。",
+        "url": "https://ryoseiimai.github.io/ai-kenshu/",
+        "provider": {
+            "@type": "Person",
+            "name": "今井涼晴"
+        },
+        "areaServed": "JP",
+        "serviceType": "AIエージェント導入サポート",
+        "offers": [
+            {
+                "@type": "Offer",
+                "name": "ライトプラン",
+                "price": "50000",
+                "priceCurrency": "JPY"
+            },
+            {
+                "@type": "Offer",
+                "name": "スタンダードプラン",
+                "price": "150000",
+                "priceCurrency": "JPY"
+            },
+            {
+                "@type": "Offer",
+                "name": "プレミアムプラン",
+                "price": "500000",
+                "priceCurrency": "JPY"
+            }
+        ]
+    }
+    </script>
     <style>
         :root {
             --gold: #d4af37;
@@ -530,9 +566,12 @@
             transition: all 0.3s;
         }
         .faq-item:hover { border-color: var(--gold); }
-        .faq-item .q { font-weight: 700; font-size: 16px; margin-bottom: 12px; color: var(--text); display: flex; gap: 12px; }
+        .faq-item .q { font-weight: 700; font-size: 16px; margin-bottom: 0; color: var(--text); display: flex; gap: 12px; align-items: center; }
         .faq-item .q::before { content: 'Q.'; color: var(--gold); font-weight: 900; flex-shrink: 0; }
-        .faq-item .a { font-size: 15px; color: var(--gray); line-height: 1.8; padding-left: 28px; }
+        .faq-item .q::after { content: '+'; margin-left: auto; font-size: 24px; color: var(--gold); flex-shrink: 0; transition: transform 0.3s; }
+        .faq-item.open .q::after { content: '-'; }
+        .faq-item .a { font-size: 15px; color: var(--gray); line-height: 1.8; padding-left: 28px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, margin-top 0.3s ease; margin-top: 0; }
+        .faq-item.open .a { max-height: 500px; margin-top: 12px; }
 
         /* Contact Form */
         .contact-section {
@@ -908,7 +947,7 @@
             <div class="testimonial-card">
                 <div class="stars">★★★★★</div>
                 <div class="result-tag">作業時間 75%削減</div>
-                <div class="quote">「報告書作成に毎日2時間かかっていたのが、研修後は30分で終わるようになりました。パソコンが苦手な現場スタッフも1時間の研修で使えるようになったのが驚きです。」</div>
+                <div class="quote">「報告書作成に毎日2時間かかっていたのが、導入後は30分で終わるようになりました。パソコンが苦手な現場スタッフも1時間のレクチャーで使えるようになったのが驚きです。」</div>
                 <div class="author"><strong>製造業 A社様</strong>（従業員50名・大阪）</div>
             </div>
             <div class="testimonial-card">
@@ -1014,7 +1053,7 @@
 <section>
     <div class="container">
         <h2 class="section-title">ご利用の<span class="accent">流れ</span></h2>
-        <p class="section-subtitle">お問い合わせから最短3日で研修実施可能です</p>
+        <p class="section-subtitle">お問い合わせから最短3日でサポート開始可能です</p>
         <div class="flow-list">
             <div class="flow-item">
                 <div class="flow-number">1</div>
@@ -1055,7 +1094,7 @@
         <div class="profile-box">
             <div class="profile-header">
                 <div class="name">今井涼晴</div>
-                <div class="title-text">RYOSEIWORLD合同会社 代表 / Claude Code実務運用者</div>
+                <div class="title-text">RYOSEIWORLD 代表 / Claude Code実務運用者</div>
                 <div class="profile-tags">
                     <span class="profile-tag">MOS Master</span>
                     <span class="profile-tag">ITパスポート</span>
@@ -1078,8 +1117,8 @@
     <div class="container">
         <div class="guarantee">
             <h3>安心の満足保証</h3>
-            <p>研修内容にご満足いただけなかった場合、理由を問わず全額返金いたします。<br>
-            それだけ研修の内容に自信があります。まずはお気軽にご相談ください。</p>
+            <p>サポート内容にご満足いただけなかった場合、理由を問わず全額返金いたします。<br>
+            それだけサービスの品質に自信があります。まずはお気軽にご相談ください。</p>
         </div>
     </div>
 </section>
@@ -1095,7 +1134,7 @@
             </div>
             <div class="faq-item">
                 <div class="q">エンジニアじゃなくても使えますか？</div>
-                <div class="a">はい。プログラミング知識ゼロでOKです。「この報告書を毎週作って」「このデータをまとめて」と日本語で指示するだけです。パソコンが苦手なスタッフでも、1時間の研修で使えるようになります。</div>
+                <div class="a">はい。プログラミング知識ゼロでOKです。「この報告書を毎週作って」「このデータをまとめて」と日本語で指示するだけです。パソコンが苦手なスタッフでも、1時間のレクチャーで使えるようになります。</div>
             </div>
             <div class="faq-item">
                 <div class="q">何人まで参加できますか？</div>
@@ -1111,7 +1150,7 @@
             </div>
             <div class="faq-item">
                 <div class="q">セキュリティが心配です</div>
-                <div class="a">Anthropic社は「AI安全性」を最重視する企業で、データの取り扱いも厳格です。社内データをAIに送信する際の注意点やセキュリティポリシーについても研修で丁寧にご説明します。</div>
+                <div class="a">Anthropic社は「AI安全性」を最重視する企業で、データの取り扱いも厳格です。社内データをAIに送信する際の注意点やセキュリティポリシーについても導入時に丁寧にご説明します。</div>
             </div>
             <div class="faq-item">
                 <div class="q">ChatGPTとの違いは何ですか？</div>
@@ -1133,23 +1172,23 @@
 
         <div class="contact-form" id="contactForm">
             <div class="form-group">
-                <label>会社名 <span class="required">必須</span></label>
+                <label for="company">会社名 <span class="required">必須</span></label>
                 <input type="text" id="company" placeholder="株式会社○○" required>
             </div>
             <div class="form-group">
-                <label>お名前 <span class="required">必須</span></label>
+                <label for="name">お名前 <span class="required">必須</span></label>
                 <input type="text" id="name" placeholder="山田 太郎" required>
             </div>
             <div class="form-group">
-                <label>メールアドレス <span class="required">必須</span></label>
+                <label for="email">メールアドレス <span class="required">必須</span></label>
                 <input type="email" id="email" placeholder="example@company.com" required>
             </div>
             <div class="form-group">
-                <label>電話番号 <span class="optional">任意</span></label>
+                <label for="phone">電話番号 <span class="optional">任意</span></label>
                 <input type="tel" id="phone" placeholder="090-0000-0000">
             </div>
             <div class="form-group">
-                <label>従業員数 <span class="required">必須</span></label>
+                <label for="employeeCount">従業員数 <span class="required">必須</span></label>
                 <select id="employeeCount" required>
                     <option value="" disabled selected>選択してください</option>
                     <option value="1-10名">1〜10名</option>
@@ -1159,7 +1198,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>現在のAI活用状況 <span class="required">必須</span></label>
+                <label for="aiStatus">現在のAI活用状況 <span class="required">必須</span></label>
                 <select id="aiStatus" required>
                     <option value="" disabled selected>選択してください</option>
                     <option value="まだ何もしていない">まだ何もしていない</option>
@@ -1181,8 +1220,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>ご希望の相談日程 <span class="optional">任意</span></label>
-                <input type="text" id="schedule" placeholder="例: 来週の平日午後、3/15以降の午前中 など">
+                <label for="schedule">ご希望の相談日程 <span class="optional">任意</span></label>
+                <input type="text" id="schedule" placeholder="例: 来週の平日午後、午前中希望 など">
             </div>
             <div style="text-align:center; margin-top:36px;">
                 <button type="button" onclick="submitForm()" class="cta-btn" id="submitBtn">無料相談を予約する</button>
@@ -1223,6 +1262,12 @@ async function submitForm() {
         return;
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('正しいメールアドレスを入力してください');
+        return;
+    }
+
     btn.textContent = '送信中...';
     btn.style.opacity = '0.6';
     btn.disabled = true;
@@ -1239,7 +1284,9 @@ async function submitForm() {
             });
         }
         document.getElementById('contactForm').style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
+        const successEl = document.getElementById('formSuccess');
+        successEl.style.display = 'block';
+        successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } catch(err) {
         alert('送信に失敗しました。kaeru3160@gmail.com まで直接ご連絡ください。');
         btn.textContent = '無料相談を予約する';
@@ -1256,11 +1303,33 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 });
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.q').addEventListener('click', () => {
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+    });
+});
+
+// Nav scroll effect
+let lastScroll = 0;
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    if (currentScroll > 100) {
+        nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)';
+    } else {
+        nav.style.boxShadow = 'none';
+    }
+    lastScroll = currentScroll;
+}, { passive: true });
 </script>
 
 <!-- Footer -->
 <footer>
-    <p>&copy; 2026 RYOSEIWORLD合同会社 | <a href="tel:07091702819">070-9170-2819</a> | <a href="mailto:kaeru3160@gmail.com">kaeru3160@gmail.com</a></p>
+    <p>&copy; 2026 RYOSEIWORLD | <a href="tel:07091702819">070-9170-2819</a> | <a href="mailto:kaeru3160@gmail.com">kaeru3160@gmail.com</a></p>
 </footer>
 
 <!-- Floating CTA (mobile) -->
