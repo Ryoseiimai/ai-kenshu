@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>たくまAx MTG アジェンダ — 4/13</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #0a0a0f;
+    color: #e8e8ed;
+    min-height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 70%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
+  }
+
+  .header-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #818cf8;
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+
+  .header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    position: relative;
+    background: linear-gradient(135deg, #e0e7ff, #c7d2fe, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .header-meta {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .header-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+  .main { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* 8ステップ概要 */
+  .flow-section {
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #a5b4fc;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(165, 180, 252, 0.15);
+    letter-spacing: 0.05em;
+  }
+
+  .flow-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 520px) {
+    .flow-grid { grid-template-columns: 1fr; }
+  }
+
+  .flow-card {
+    background: rgba(30, 30, 50, 0.6);
+    border: 1px solid rgba(99, 102, 241, 0.12);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    transition: border-color 0.2s;
+  }
+
+  .flow-card:hover { border-color: rgba(99, 102, 241, 0.35); }
+
+  .flow-num {
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: #818cf8;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 6px;
+    min-width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .flow-text {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #cbd5e1;
+  }
+
+  .flow-text strong { color: #e2e8f0; }
+
+  /* アジェンダ */
+  .agenda-item {
+    background: rgba(30, 30, 50, 0.5);
+    border-left: 3px solid #6366f1;
+    border-radius: 0 12px 12px 0;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .agenda-item h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .agenda-time {
+    font-size: 0.7rem;
+    color: #818cf8;
+    background: rgba(99, 102, 241, 0.1);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 400;
+  }
+
+  .agenda-item ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .agenda-item li {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    padding: 0.3rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .agenda-item li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #6366f1;
+    font-size: 0.8rem;
+  }
+
+  .footer-note {
+    margin-top: 2.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #475569;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">Meeting Agenda</div>
+  <h1>たくまAx MTG</h1>
+  <div class="header-meta">
+    <span>📅 2026年4月13日（月）14:00〜</span>
+    <span>⏱ 約40分</span>
+    <span>💻 Google Meet</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- 8ステップ概要 -->
+  <div class="flow-section">
+    <div class="section-title">たくまAx — 8ステップ自動化フロー</div>
+    <div class="flow-grid">
+      <div class="flow-card">
+        <div class="flow-num">01</div>
+        <div class="flow-text"><strong>人格登録</strong><br>AIにペルソナを事前設定</div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">02</div>
+        <div class="flow-text"><strong>トレンドリサーチ</strong><br>人格が好むトレンドをAIが自動収集</div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">03</div>
+        <div class="flow-text"><strong>コンテンツ生成</strong><br>その人格が書きそうな文章をAI生成</div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">04</div>
+        <div class="flow-text"><strong>LP自動作成</strong><br>興味を持った人向けのLPをAI半自動作成</div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">05</div>
+        <div class="flow-text"><strong>CTA→LINE接続</strong><br>LPのCTAからLINEステップへ誘導</div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">06</div>
+        <div class="flow-text"><strong>LINEステップ配信</strong><br>人格に沿ったコンテンツをステップ配信</div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">07</div>
+        <div class="flow-text"><strong>クロージング</strong><br>商品・サービスの購入/申込み</div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-num">08</div>
+        <div class="flow-text"><strong>有料会員ページ</strong><br>会員向け限定コンテンツ展開</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- アジェンダ -->
+  <div class="section-title">アジェンダ</div>
+
+  <div class="agenda-item">
+    <h3>現状の共有 <span class="agenda-time">10分</span></h3>
+    <ul>
+      <li>8ステップのうち、今どこまで形になっている？</li>
+      <li>テスト運用は始まった？対象は誰の人格？</li>
+      <li>技術スタック（何で作ってる / 作る予定？）</li>
+    </ul>
+  </div>
+
+  <div class="agenda-item">
+    <h3>役割分担 <span class="agenda-time">10分</span></h3>
+    <ul>
+      <li>それぞれの担当範囲（開発 / 営業 / マーケ）</li>
+      <li>スケジュール感（いつまでに何を動かす？）</li>
+      <li>必要なリソース・コスト</li>
+    </ul>
+  </div>
+
+  <div class="agenda-item">
+    <h3>マネタイズ <span class="agenda-time">10分</span></h3>
+    <ul>
+      <li>料金体系（月額？フリーミアム？）</li>
+      <li>最初のターゲット顧客像</li>
+      <li>テスト運用→有料化への道筋</li>
+    </ul>
+  </div>
+
+  <div class="agenda-item">
+    <h3>ネクストアクション <span class="agenda-time">10分</span></h3>
+    <ul>
+      <li>MTG後にそれぞれがやること</li>
+      <li>次のMTG日程</li>
+    </ul>
+  </div>
+
+  <div class="footer-note">RYOSEIWORLD × たくまAx</div>
+
+</div>
+
+</body>
+</html>
